@@ -27,7 +27,7 @@ If you built a configurable and useful downloader class feel free to contribute 
 
 Use [composer](https://getcomposer.org/), so please run
 ```shell
-composer require eclipxe/XmlResourceRetriever
+composer require eclipxe/xmlresourceretriever
 ```
 
 
