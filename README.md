@@ -90,7 +90,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [license]: https://github.com/eclipxe13/XmlResourceRetriever/blob/master/LICENSE
 [build]: https://travis-ci.org/eclipxe13/XmlResourceRetriever?branch=master
 [quality]: https://scrutinizer-ci.com/g/eclipxe13/XmlResourceRetriever/
-[sensiolabs]: https://insight.sensiolabs.com/projects/:INSIGHT_UUID
+[sensiolabs]: https://insight.sensiolabs.com/projects/7a1d00e7-c5b3-4396-9780-5da83b939a73
 [coverage]: https://scrutinizer-ci.com/g/eclipxe13/XmlResourceRetriever/code-structure/master
 [downloads]: https://packagist.org/packages/eclipxe/XmlResourceRetriever
 
@@ -99,6 +99,6 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [badge-build]: https://img.shields.io/travis/eclipxe13/XmlResourceRetriever/master.svg?style=flat-square
 [badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/XmlResourceRetriever/master.svg?style=flat-square
-[badge-sensiolabs]: https://insight.sensiolabs.com/projects/:INSIGHT_UUID/mini.png
+[badge-sensiolabs]: https://insight.sensiolabs.com/projects/7a1d00e7-c5b3-4396-9780-5da83b939a73/mini.png
 [badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/XmlResourceRetriever/master.svg?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/XmlResourceRetriever.svg?style=flat-square
