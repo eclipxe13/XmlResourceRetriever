@@ -94,9 +94,10 @@ abstract class AbstractRetriever
     {
         $localFilename = $this->download($resource);
 
-        // load the document, on fail just return as normal get
         $document = new DOMDocument();
-        if (! @$document->load($localFilename)) {
+        // this error silenced call is intentional,
+        // don't need to change the value of libxml_use_internal_errors for this
+        if (false === @$document->load($localFilename)) {
             unlink($localFilename);
             throw new \RuntimeException("The source $resource contains errors");
         }
