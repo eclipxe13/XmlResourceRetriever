@@ -60,7 +60,7 @@ abstract class AbstractRetriever
     public function buildPath(string $url): string
     {
         $options = FILTER_FLAG_SCHEME_REQUIRED | FILTER_FLAG_HOST_REQUIRED | FILTER_FLAG_PATH_REQUIRED;
-        if (! filter_var($url, FILTER_VALIDATE_URL, $options) || false == $parts = parse_url($url)) {
+        if (false === filter_var($url, FILTER_VALIDATE_URL, $options) || false == $parts = parse_url($url)) {
             throw new \InvalidArgumentException("Invalid URL: $url");
         }
         return $this->basePath . '/' . $parts['host'] . '/' . ltrim($parts['path'], '/');
