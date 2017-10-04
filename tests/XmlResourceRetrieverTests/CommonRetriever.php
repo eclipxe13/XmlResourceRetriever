@@ -13,7 +13,7 @@ class CommonRetriever extends AbstractRetriever
     protected function searchElements(): array
     {
         return [
-            ['element' => 'imgage', 'attribute' => 'href'],
+            ['element' => 'resource', 'attribute' => 'href'],
         ];
     }
 }

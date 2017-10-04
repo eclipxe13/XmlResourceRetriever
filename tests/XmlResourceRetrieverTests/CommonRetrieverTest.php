@@ -2,6 +2,7 @@
 namespace XmlResourceRetrieverTests;
 
 use XmlResourceRetriever\Downloader\DownloaderInterface;
+use XmlResourceRetriever\RetrieverInterface;
 
 /**
  * This test case is using CommonRetriever as base to
@@ -14,6 +15,7 @@ class CommonRetrieverTest extends RetrieverTestCase
     public function testConstructMinimal()
     {
         $retriever = new CommonRetriever('foo');
+        $this->assertInstanceOf(RetrieverInterface::class, $retriever);
         $this->assertEquals('foo', $retriever->getBasePath());
         $this->assertInstanceOf(DownloaderInterface::class, $retriever->getDownloader());
     }
@@ -30,6 +32,16 @@ class CommonRetrieverTest extends RetrieverTestCase
         $url = 'http://example.org/some/file.txt';
         $expectedPath = '../example.org/some/file.txt';
         $this->assertEquals($expectedPath, $retriever->buildPath($url));
+    }
+
+    public function testDownloadThrowsExceptionOnEmptyString()
+    {
+        $retriever = new CommonRetriever('foo');
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessage('The argument to download is empty');
+
+        $retriever->download('');
     }
 
     public function testDownloadSimpleCase()
@@ -144,5 +156,45 @@ class CommonRetrieverTest extends RetrieverTestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid URL');
         $retriever->buildPath($url);
+    }
+
+    /*
+     * The files under http://localhost:8999/other/common/ cover multiple cases:
+     * - recursive: foo requires bar, bar requires foo
+     * - recursive: baz require baz
+     * - download: related attribute is relative instead of absolute
+     * - empty attribute
+     * - missing attribute
+     * - attribute exists but tag is different
+     */
+    public function testRetrieverWithHistory()
+    {
+        $localPath = $this->buildPath('common');
+        $this->pathToClear($localPath);
+
+        $remoteParent = 'http://localhost:8999/other/common/parent.xml';
+        $expectedRetrievedFiles = [
+            'parent.xml',
+            'child.xml',
+            'recursive-self.xml',
+            'foo.xml',
+        ];
+        $expectedCountRetrievedFiles = count($expectedRetrievedFiles);
+
+        $this->assertDirectoryNotExists($localPath, "The path $localPath must not exists to run this test");
+
+        $retriever = new CommonRetriever($localPath);
+        $expectedDestination = dirname($retriever->buildPath($remoteParent));
+        $retriever->retrieve($remoteParent);
+
+        $history = $retriever->retrieveHistory();
+        $this->assertCount($expectedCountRetrievedFiles, $history);
+
+        $retrievedFiles = glob($expectedDestination . '/*.xml');
+        $this->assertCount($expectedCountRetrievedFiles, $retrievedFiles);
+        foreach ($retrievedFiles as $retrievedFile) {
+            $this->assertContains($retrievedFile, $history);
+            $this->assertContains(basename($retrievedFile), $expectedRetrievedFiles);
+        }
     }
 }

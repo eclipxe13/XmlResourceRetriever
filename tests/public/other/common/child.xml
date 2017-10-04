@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<x:root xmlns:x="http://example.com/ns">
+    <x:resource href="http://localhost:8999/other/common/parent.xml">
+        This is a recursive call to parent, must not be downloaded
+    </x:resource>
+    <x:resource>
+        This reource tag does not contains an href, must be simply ignored
+    </x:resource>
+    <x:style href="http://localhost:8999/other/common/x/x.xml">
+        This tag have an href but the tag is not resource, must be simply ignored
+    </x:style>
+</x:root>

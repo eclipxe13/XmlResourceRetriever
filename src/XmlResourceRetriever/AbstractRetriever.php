@@ -5,13 +5,19 @@ use DOMDocument;
 use XmlResourceRetriever\Downloader\DownloaderInterface;
 use XmlResourceRetriever\Downloader\PhpDownloader;
 
-abstract class AbstractRetriever
+abstract class AbstractRetriever implements RetrieverInterface
 {
     /** @var string */
     private $basePath;
 
     /** @var DownloaderInterface */
     private $downloader;
+
+    /**
+     * This variable stores the list of retrieved resources to avoid infinite recursion
+     * @var array
+     */
+    private $history = [];
 
     /**
      * Must return a string with the namespace to search for
@@ -59,8 +65,7 @@ abstract class AbstractRetriever
 
     public function buildPath(string $url): string
     {
-        $options = FILTER_FLAG_SCHEME_REQUIRED | FILTER_FLAG_HOST_REQUIRED | FILTER_FLAG_PATH_REQUIRED;
-        if (false === filter_var($url, FILTER_VALIDATE_URL, $options) || false === $parts = parse_url($url)) {
+        if (false === $parts = $this->urlParts($url)) {
             throw new \InvalidArgumentException("Invalid URL: $url");
         }
         return $this->basePath . '/' . $parts['host'] . '/' . ltrim($parts['path'], '/');
@@ -68,6 +73,11 @@ abstract class AbstractRetriever
 
     public function download(string $resource): string
     {
+        // validate resource
+        if ('' === $resource) {
+            throw new \UnexpectedValueException('The argument to download is empty');
+        }
+
         // set destination
         $localPath = $this->buildPath($resource);
 
@@ -92,7 +102,23 @@ abstract class AbstractRetriever
 
     public function retrieve(string $resource): string
     {
+        $this->history = [];
+        return $this->doRetrieve($resource);
+    }
+
+    public function retrieveHistory(): array
+    {
+        return $this->history;
+    }
+
+    /**
+     * @param string $resource
+     * @return string
+     */
+    private function doRetrieve(string $resource): string
+    {
         $localFilename = $this->download($resource);
+        $this->history[$resource] = $localFilename;
 
         $document = new DOMDocument();
         // this error silenced call is intentional,
@@ -105,7 +131,14 @@ abstract class AbstractRetriever
         // call recursive get searching on specified the elements
         $changed = false;
         foreach ($this->searchElements() as $search) {
-            if ($this->recursiveRetrieve($document, $search['element'], $search['attribute'], $localFilename)) {
+            $recursiveRetrieve = $this->recursiveRetrieve(
+                $document,
+                $search['element'],
+                $search['attribute'],
+                $resource,
+                $localFilename
+            );
+            if ($recursiveRetrieve) {
                 $changed = true;
             }
         }
@@ -116,10 +149,11 @@ abstract class AbstractRetriever
         return $localFilename;
     }
 
-    protected function recursiveRetrieve(
+    private function recursiveRetrieve(
         DOMDocument $document,
         string $tagName,
         string $attributeName,
+        string $currentUrl,
         string $currentFile
     ): bool {
         $modified = false;
@@ -130,11 +164,43 @@ abstract class AbstractRetriever
                 continue;
             }
             $location = $element->getAttribute($attributeName);
-            $downloadedChild = $this->retrieve($location);
+            if ('' === $location) {
+                continue;
+            }
+            $location = $this->relativeToAbsoluteUrl($location, $currentUrl);
+            if (array_key_exists($location, $this->history)) {
+                continue;
+            }
+            $downloadedChild = $this->doRetrieve($location);
             $relative = Utils::relativePath($currentFile, $downloadedChild);
             $element->setAttribute($attributeName, $relative);
             $modified = true;
         }
         return $modified;
+    }
+
+    private function urlParts(string $url)
+    {
+        $options = FILTER_FLAG_SCHEME_REQUIRED | FILTER_FLAG_HOST_REQUIRED | FILTER_FLAG_PATH_REQUIRED;
+        if (false === filter_var($url, FILTER_VALIDATE_URL, $options)) {
+            return false;
+        }
+        return parse_url($url);
+    }
+
+    private function relativeToAbsoluteUrl(string $url, string $currentUrl)
+    {
+        if (false !== $parts = $this->urlParts($url)) {
+            return $url;
+        }
+        $currentParts = $this->urlParts($currentUrl);
+        $currentParts['port'] = (isset($currentParts['port'])) ? ':' . $currentParts['port'] : '';
+        return implode('', [
+            $currentParts['scheme'],
+            '://',
+            $currentParts['host'],
+            $currentParts['port'],
+            implode('/', Utils::simplifyPath(dirname($currentParts['path']) . '/' . $url)),
+        ]);
     }
 }
