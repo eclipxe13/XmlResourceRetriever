@@ -190,7 +190,7 @@ abstract class AbstractRetriever implements RetrieverInterface
 
     private function relativeToAbsoluteUrl(string $url, string $currentUrl)
     {
-        if (false !== $parts = $this->urlParts($url)) {
+        if (false !== $this->urlParts($url)) {
             return $url;
         }
         $currentParts = $this->urlParts($currentUrl);
