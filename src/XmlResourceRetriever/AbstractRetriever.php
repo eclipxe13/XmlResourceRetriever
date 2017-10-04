@@ -5,13 +5,19 @@ use DOMDocument;
 use XmlResourceRetriever\Downloader\DownloaderInterface;
 use XmlResourceRetriever\Downloader\PhpDownloader;
 
-abstract class AbstractRetriever
+abstract class AbstractRetriever implements RetrieverInterface
 {
     /** @var string */
     private $basePath;
 
     /** @var DownloaderInterface */
     private $downloader;
+
+    /**
+     * This variable stores the list of retrieved resources to avoid infinite recursion
+     * @var array
+     */
+    private $history = [];
 
     /**
      * Must return a string with the namespace to search for
@@ -92,7 +98,23 @@ abstract class AbstractRetriever
 
     public function retrieve(string $resource): string
     {
+        $this->history = [];
+        return $this->doRetrieve($resource);
+    }
+
+    public function retrieveHistory(): array
+    {
+        return $this->history;
+    }
+
+    /**
+     * @param string $resource
+     * @return string
+     */
+    private function doRetrieve(string $resource): string
+    {
         $localFilename = $this->download($resource);
+        $this->history[$resource] = $localFilename;
 
         $document = new DOMDocument();
         // this error silenced call is intentional,
@@ -130,7 +152,13 @@ abstract class AbstractRetriever
                 continue;
             }
             $location = $element->getAttribute($attributeName);
-            $downloadedChild = $this->retrieve($location);
+            if ('' === $location) {
+                continue;
+            }
+            if (array_key_exists($location, $this->history)) {
+                continue;
+            }
+            $downloadedChild = $this->doRetrieve($location);
             $relative = Utils::relativePath($currentFile, $downloadedChild);
             $element->setAttribute($attributeName, $relative);
             $modified = true;

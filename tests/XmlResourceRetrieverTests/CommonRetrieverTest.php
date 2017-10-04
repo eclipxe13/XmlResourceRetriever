@@ -2,6 +2,7 @@
 namespace XmlResourceRetrieverTests;
 
 use XmlResourceRetriever\Downloader\DownloaderInterface;
+use XmlResourceRetriever\RetrieverInterface;
 
 /**
  * This test case is using CommonRetriever as base to
@@ -14,6 +15,7 @@ class CommonRetrieverTest extends RetrieverTestCase
     public function testConstructMinimal()
     {
         $retriever = new CommonRetriever('foo');
+        $this->assertInstanceOf(RetrieverInterface::class, $retriever);
         $this->assertEquals('foo', $retriever->getBasePath());
         $this->assertInstanceOf(DownloaderInterface::class, $retriever->getDownloader());
     }
