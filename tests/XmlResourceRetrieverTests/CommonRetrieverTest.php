@@ -34,6 +34,16 @@ class CommonRetrieverTest extends RetrieverTestCase
         $this->assertEquals($expectedPath, $retriever->buildPath($url));
     }
 
+    public function testDownloadThrowsExceptionOnEmptyString()
+    {
+        $retriever = new CommonRetriever('foo');
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessage('The argument to download is empty');
+
+        $retriever->download('');
+    }
+
     public function testDownloadSimpleCase()
     {
         $localPath = $this->buildPath('foo');

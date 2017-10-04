@@ -74,6 +74,11 @@ abstract class AbstractRetriever implements RetrieverInterface
 
     public function download(string $resource): string
     {
+        // validate resource
+        if ('' === $resource) {
+            throw new \UnexpectedValueException('The argument to download is empty');
+        }
+
         // set destination
         $localPath = $this->buildPath($resource);
 
