@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<x:root xmlns:x="http://example.com/ns">
+    <x:resource href="http://localhost:8999/other/common/recursive-self.xml">
+        This file is including itself, must be retrieved only once
+    </x:resource>
+</x:root>
