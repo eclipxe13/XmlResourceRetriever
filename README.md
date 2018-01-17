@@ -13,7 +13,7 @@
 
 The purpose of this library is to download recursively XML resources from internet
 to a local storage for further usage. In this moment it only allows Schemas (XSL) and Transformations (XSLT)
-but is easely extensible implementing the `AbstractRetriever` class.
+but is easely extensible implementing the `AbstractXmlRetriever` class.
 
 For every downloaded file it will override its dependences to a relative location, in this way, every dependence
 should be available to work offline.

@@ -1,7 +1,7 @@
 <?php
 namespace XmlResourceRetriever;
 
-class XsdRetriever extends AbstractRetriever
+class XsdRetriever extends AbstractXmlRetriever
 {
     protected function searchNamespace(): string
     {

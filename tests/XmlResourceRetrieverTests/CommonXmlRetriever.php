@@ -1,9 +1,9 @@
 <?php
 namespace XmlResourceRetrieverTests;
 
-use XmlResourceRetriever\AbstractRetriever;
+use XmlResourceRetriever\AbstractXmlRetriever;
 
-class CommonRetriever extends AbstractRetriever
+class CommonXmlRetriever extends AbstractXmlRetriever
 {
     protected function searchNamespace(): string
     {
