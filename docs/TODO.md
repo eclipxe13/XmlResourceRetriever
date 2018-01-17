@@ -1,5 +1,7 @@
 # eclipxe/XmlResourceRetriever To Do List
 
+**Remove AbstractRetriever class, already deprecated**
+
 - [ ] It may be nice to move file system operations (like is_dir, mkdir and finfo) to another object.
       In this way it would be possible to use flysystem inside the Retriever.
 - [ ] Create script to run in common line interface `bin/xml-resource-retriever`.

@@ -13,7 +13,7 @@
 
 The purpose of this library is to download recursively XML resources from internet
 to a local storage for further usage. In this moment it only allows Schemas (XSL) and Transformations (XSLT)
-but is easely extensible implementing the `AbstractRetriever` class.
+but is easely extensible implementing the `AbstractXmlRetriever` class.
 
 For every downloaded file it will override its dependences to a relative location, in this way, every dependence
 should be available to work offline.
@@ -91,7 +91,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [build]: https://travis-ci.org/eclipxe13/XmlResourceRetriever?branch=master
 [quality]: https://scrutinizer-ci.com/g/eclipxe13/XmlResourceRetriever/
 [sensiolabs]: https://insight.sensiolabs.com/projects/7a1d00e7-c5b3-4396-9780-5da83b939a73
-[coverage]: https://scrutinizer-ci.com/g/eclipxe13/XmlResourceRetriever/code-structure/master
+[coverage]: https://scrutinizer-ci.com/g/eclipxe13/XmlResourceRetriever/code-structure/master/code-coverage
 [downloads]: https://packagist.org/packages/eclipxe/XmlResourceRetriever
 
 [badge-source]: http://img.shields.io/badge/source-eclipxe13/XmlResourceRetriever-blue.svg?style=flat-square

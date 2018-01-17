@@ -1,9 +1,17 @@
+# Version 1.2.0 2018-01-17
+- Split `AbstractRetriever` into `AbstractBaseRetriever` and `AbstractXmlRetriever`
+- Deprecate `AbstractRetriever`, will be removed in next version that break compatibility
+- Use `AbstractBaseRetriever` if you need the logic for download, buildPath, gistory, getter and setters already made
+- Use `AbstractXmlRetriever` to work with strictly xml resources
+- `XsdRetriever` and `XsltRetriever` now extends `AbstractXmlRetriever`
+- The testing class `CommonRetriever` is renamed to `CommonXmlRetriever`
+
 # Version 1.1.0 2017-10-03
 - Created a new interface `RetrieverInterface` that defines the contract for a retriever object
-- Both `XsltRetriever` and `XsdRetriver` implements that interface since `AbstractRetriever` implements it.
+- Both `XsltRetriever` and `XsdRetriver` implements that interface since `AbstractXmlRetriever` implements it.
 - Add new method `RetrieverInterface::retrieveHistory(): array` that must return the list or urls and paths
   returned in the last invocation of `RetrieverInterface::retrieve` method. 
-- `AbstractRetriever::download` throws an exception if empty string is provided.
+- `AbstractXmlRetriever::download` throws an exception if empty string is provided.
 - Fix infinite recursion problems:
     foo requires bar and bar requires foo
     baz require baz
