@@ -5,6 +5,7 @@
 - Fix phpunit.xml.dist settings
 - Add phpstan-shim to build dependences, fix issues found
 - Fix travis build to only create coverage on one PHP version
+- Move from parallel-lint to phplint
 
 # Version 1.2.0 2018-01-17
 - Split `AbstractRetriever` into `AbstractBaseRetriever` and `AbstractXmlRetriever`

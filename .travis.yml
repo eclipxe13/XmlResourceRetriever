@@ -18,8 +18,8 @@ before_script:
   - travis_retry composer install --no-interaction --no-progress --prefer-dist
 
 script:
-  - mkdir -p build/
-  - vendor/bin/parallel-lint src/ tests/
+  - mkdir -p build/tests
+  - vendor/bin/phplint
   - vendor/bin/phpcs -sp src/ tests/
   - vendor/bin/php-cs-fixer fix --using-cache=no --dry-run --verbose
   - |
@@ -28,13 +28,13 @@ script:
     else
       vendor/bin/phpunit
     fi
-  - vendor/bin/phpstan src/ tests/
+  - vendor/bin/phpstan analyze --level max src/ tests/
 
 after_script:
   - |
     if [[ $TRAVIS_PHP_VERSION == '7.0' ]]; then
       wget https://scrutinizer-ci.com/ocular.phar
-      php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml
+      php ocular.phar code-coverage:upload --format=php-clover build/tests/coverage.xml
     fi
 
 notifications:
