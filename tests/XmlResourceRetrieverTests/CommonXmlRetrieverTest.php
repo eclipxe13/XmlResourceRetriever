@@ -65,6 +65,18 @@ class CommonXmlRetrieverTest extends RetrieverTestCase
         $this->assertXmlFileEqualsXmlFile($public, $downloaded);
     }
 
+    public function testDownloadThrowsExceptionOnEmptyFile()
+    {
+        $localPath = $this->buildPath('empty');
+        $this->pathToClear($localPath);
+        $remote = 'http://localhost:8999/other/empty.xml';
+        $retriever = new CommonXmlRetriever($localPath);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('it is empty');
+        $retriever->download($remote);
+    }
+
     public function testDownloadNotAnXmlFileThrowsAnExceptionAndRemoveTheFile()
     {
         $localPath = $this->buildPath('other');
