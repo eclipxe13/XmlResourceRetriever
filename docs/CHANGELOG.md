@@ -4,6 +4,7 @@
 - Allow PHPUnit ^7.3 if PHP => 7.1
 - Fix phpunit.xml.dist settings
 - Add phpstan-shim to build dependences, fix issues found
+- Fix travis build to only create coverage on one PHP version
 
 # Version 1.2.0 2018-01-17
 - Split `AbstractRetriever` into `AbstractBaseRetriever` and `AbstractXmlRetriever`
