@@ -29,11 +29,11 @@ class UtilsSimplifyPathTest extends TestCase
     }
 
     /**
-     * @param $source
-     * @param $expected
+     * @param string $source
+     * @param string[] $expected
      * @dataProvider providerExpectedBehavior
      */
-    public function testExpectedBehavior($source, $expected)
+    public function testExpectedBehavior(string $source, array $expected)
     {
         $this->assertEquals($expected, Utils::simplifyPath($source));
     }

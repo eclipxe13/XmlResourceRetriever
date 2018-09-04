@@ -81,6 +81,7 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
 
         // create local path
         $dirname = dirname($localPath);
+        /** @noinspection PhpUsageOfSilenceOperatorInspection */
         if (! is_dir($dirname) && ! @mkdir($dirname, 0777, true)) {
             throw new \RuntimeException("Unable to create directory $dirname");
         }

@@ -1,3 +1,12 @@
+# Version 1.2.1 2018-0-04
+- An XML resource that is an empty file is declared as not valid
+- Include missing extensions in composer.json
+- Allow PHPUnit ^7.3 if PHP => 7.1
+- Fix phpunit.xml.dist settings
+- Add phpstan-shim to build dependences, fix issues found
+- Fix travis build to only create coverage on one PHP version
+- Move from parallel-lint to phplint
+
 # Version 1.2.0 2018-01-17
 - Split `AbstractRetriever` into `AbstractBaseRetriever` and `AbstractXmlRetriever`
 - Deprecate `AbstractRetriever`, will be removed in next version that break compatibility

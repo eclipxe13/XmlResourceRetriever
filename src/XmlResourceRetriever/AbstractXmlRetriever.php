@@ -44,6 +44,7 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
         $document = new DOMDocument();
         // this error silenced call is intentional,
         // don't need to change the value of libxml_use_internal_errors for this
+        /** @noinspection PhpUsageOfSilenceOperatorInspection */
         if (false === @$document->load($localFilename)) {
             unlink($localFilename);
             throw new \RuntimeException("The source $resource contains errors");
@@ -110,6 +111,11 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
      */
     protected function checkIsValidDownloadedFile(string $source, string $path)
     {
+        // check content is not empty
+        if (0 === (int) filesize($path)) {
+            unlink($path);
+            throw new \RuntimeException("The source $source is not an xml file because it is empty");
+        }
         // check content is xml
         $mimetype = (new \finfo())->file($path, FILEINFO_MIME_TYPE);
         if (! in_array($mimetype, ['text/xml', 'application/xml'])) {

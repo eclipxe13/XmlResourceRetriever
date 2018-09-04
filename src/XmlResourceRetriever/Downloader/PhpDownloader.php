@@ -5,6 +5,7 @@ class PhpDownloader implements DownloaderInterface
 {
     public function downloadTo(string $source, string $destination)
     {
+        /** @noinspection PhpUsageOfSilenceOperatorInspection */
         if (! @copy($source, $destination)) {
             $previousException = null;
             if (null !== $lastError = error_get_last()) {
