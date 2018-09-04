@@ -21,12 +21,12 @@ class UtilsRelativePathTest extends TestCase
     }
 
     /**
-     * @param $source
-     * @param $destination
-     * @param $expected
+     * @param string $source
+     * @param string $destination
+     * @param string $expected
      * @dataProvider providerExpectedBehavior
      */
-    public function testExpectedBehavior($source, $destination, $expected)
+    public function testExpectedBehavior(string $source, string $destination, string $expected)
     {
         $this->assertEquals($expected, Utils::relativePath($source, $destination));
     }

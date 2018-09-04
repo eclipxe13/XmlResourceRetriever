@@ -49,6 +49,9 @@ abstract class RetrieverTestCase extends TestCase
             return;
         }
         $contents = dir($dirname);
+        if (! $contents instanceof \Directory) {
+            throw new \RuntimeException("Unable to open directory $dirname");
+        }
         while (false !== $location = $contents->read()) {
             if ('..' === $location || '.' === $location) {
                 continue;

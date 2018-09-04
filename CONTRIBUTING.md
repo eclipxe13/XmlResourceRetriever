@@ -78,7 +78,8 @@ Before you can run these, be sure to `composer install` or `composer update`.
 vendor/bin/parallel-lint src/ tests/
 vendor/bin/phpcs -sp src/ tests/
 vendor/bin/php-cs-fixer fix -v --dry-run
-vendor/bin/phpunit --coverage-text
+vendor/bin/phpunit
+vendor/bin/phpstan src/ tests/
 ```
 
 There are some tests that require you to download big samples, please read [test/public/README.md] to
