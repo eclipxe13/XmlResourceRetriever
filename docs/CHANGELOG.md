@@ -2,6 +2,7 @@
 - Improve `XmlResourceRetriever\AbstractBaseRetriever::urlParts`
     - Remove deprecated useless constants `FILTER_FLAG_SCHEME_REQUIRED` or `FILTER_FLAG_HOST_REQUIRED`
     - Add docblocks
+- Add context features to `XmlResourceRetriever\Downloader\PhpDownloader` and tests
 
 # Version 1.2.1 2018-09-04
 - An XML resource that is an empty file is declared as not valid
