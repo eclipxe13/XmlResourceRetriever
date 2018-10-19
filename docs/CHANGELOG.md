@@ -4,6 +4,7 @@
     - Add docblocks
 - Add stream context features to `XmlResourceRetriever\Downloader\PhpDownloader` and tests
 - Add strict_types to all project
+- Improve configuration file for php-cs-fixer tool
 
 # Version 1.2.1 2018-09-04
 - An XML resource that is an empty file is declared as not valid
