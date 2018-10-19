@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace XmlResourceRetriever;
 
 use XmlResourceRetriever\Downloader\DownloaderInterface;
@@ -110,12 +112,18 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
         $this->history[$source] = $localpath;
     }
 
+    /**
+     * Retrieve url parts (as in parse_url)
+     * If url is malformed return false
+     *
+     * @param string $url
+     * @return array|false
+     */
     protected function urlParts(string $url)
     {
-        $options = FILTER_FLAG_SCHEME_REQUIRED | FILTER_FLAG_HOST_REQUIRED | FILTER_FLAG_PATH_REQUIRED;
-        if (false === filter_var($url, FILTER_VALIDATE_URL, $options)) {
+        if (false === filter_var($url, FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED)) {
             return false;
         }
-        return parse_url($url);
+        return parse_url($url) ?: false;
     }
 }
