@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace XmlResourceRetrieverTests\Downloader;
 
 use PHPUnit\Framework\TestCase;
