@@ -22,8 +22,8 @@ class PhpDownloaderTest extends TestCase
     public function testSetContextThrowsExceptionWithInvalidParameter()
     {
         $downloader = new PhpDownloader();
-        /** @var resource|false $isNotResource */
-        $isNotResource = false;
+        /** @var resource $isNotResource */
+        $isNotResource = null;
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Provided context is not a resource');
