@@ -7,3 +7,4 @@
 - [ ] Create script to run in common line interface `bin/xml-resource-retriever`.
 - [ ] Add docblocks to all public methods and create docs based on that.
 - [ ] Enable strict types on every file? `declare(strict_types=1)`
+- [ ] When using resources validate that they are of specific type using `get_resource_type`
