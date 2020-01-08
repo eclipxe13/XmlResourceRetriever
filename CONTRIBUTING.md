@@ -83,13 +83,13 @@ vendor/bin/phpstan analyze --level max src/ tests/
 ```
 
 There are some tests that require you to download big samples, please read [test/public/README.md] to
-retrieve the more advanced structures from www.sat.gob.mx. 
+retrieve the more advanced structures from `http://www.sat.gob.mx/`. 
 
-## web server instance while running tests
+## Web server instance while running tests
 
 The phpunit process in the bootstrap step uses the PHP built-in web server in port 8999 to serve the contents
 of `tests/public` in order to simulate retrieving contents from internet.
 
-When the phpunit process ends, the web server instance is killed
+When the phpunit process ends, the web server instance is killed.
 
 Take a look in `tests/boostrap.php` to see how this is working.  
