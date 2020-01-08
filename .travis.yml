@@ -14,6 +14,7 @@ script:
   - vendor/bin/php-cs-fixer fix --using-cache=no --dry-run --verbose
   - vendor/bin/phpunit --verbose
   - vendor/bin/phpstan analyze --level max src/ tests/
+  - vendor/bin/psalm
 
 notifications:
   email:

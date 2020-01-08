@@ -34,6 +34,7 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
      * @param string $source
      * @param string $localpath
      * @throws \RuntimeException when the source is not valid
+     * @return void
      */
     abstract protected function checkIsValidDownloadedFile(string $source, string $localpath);
 
@@ -59,6 +60,10 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
         return $this->downloader;
     }
 
+    /**
+     * @param DownloaderInterface $downloader
+     * @return void
+     */
     public function setDownloader(DownloaderInterface $downloader)
     {
         $this->downloader = $downloader;
@@ -103,11 +108,19 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
         return $this->history;
     }
 
+    /**
+     * @return void
+     */
     protected function clearHistory()
     {
         $this->history = [];
     }
 
+    /**
+     * @param string $source
+     * @param string $localpath
+     * @return void
+     */
     protected function addToHistory(string $source, string $localpath)
     {
         $this->history[$source] = $localpath;
@@ -118,13 +131,17 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
      * If url is malformed return false
      *
      * @param string $url
-     * @return array|false
+     * @return string[]|false
      */
     protected function urlParts(string $url)
     {
         if (false === filter_var($url, FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED)) {
             return false;
         }
-        return parse_url($url) ?: false;
+        $parsed = parse_url($url);
+        if (false === $parsed) {
+            return false;
+        }
+        return array_map('strval', $parsed);
     }
 }

@@ -25,7 +25,7 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
      * "element" is the tag name to search for
      * "attribute" is the attribute name that contains the url
      *
-     * @return array
+     * @return array<array<string, string>>
      */
     abstract protected function searchElements(): array;
 
@@ -127,13 +127,14 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
         }
     }
 
-    private function relativeToAbsoluteUrl(string $url, string $currentUrl)
+    private function relativeToAbsoluteUrl(string $url, string $currentUrl): string
     {
         if (false !== $this->urlParts($url)) {
             return $url;
         }
         $currentParts = $this->urlParts($currentUrl) ?: [];
-        $currentParts['port'] = (isset($currentParts['port'])) ? ':' . $currentParts['port'] : '';
+        $currentParts['port'] = $currentParts['port'] ?? '';
+        $currentParts['port'] = ('' !== $currentParts['port']) ? ':' . $currentParts['port'] : '';
         return implode('', [
             $currentParts['scheme'],
             '://',

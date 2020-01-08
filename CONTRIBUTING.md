@@ -78,7 +78,8 @@ Before you can run these, be sure to `composer install` or `composer update`.
 vendor/bin/phpcs -sp src/ tests/
 vendor/bin/php-cs-fixer fix -v --dry-run
 vendor/bin/phpunit
-vendor/bin/phpstan analyze --level max src/ tests/
+vendor/bin/phpstan analyze --no-progress --verbose --level max src/ tests/
+vendor/bin/psalm --no-progress
 ```
 
 There are some tests that require you to download big samples, please read [test/public/README.md] to

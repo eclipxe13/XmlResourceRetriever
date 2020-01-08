@@ -43,7 +43,7 @@ class Utils
      * Simplify a path and return its parts as an array
      *
      * @param string $path
-     * @return array
+     * @return string[]
      */
     public static function simplifyPath(string $path): array
     {
