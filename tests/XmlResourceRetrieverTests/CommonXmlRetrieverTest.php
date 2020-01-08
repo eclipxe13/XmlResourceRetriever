@@ -205,7 +205,7 @@ class CommonXmlRetrieverTest extends RetrieverTestCase
         $history = $retriever->retrieveHistory();
         $this->assertCount($expectedCountRetrievedFiles, $history);
 
-        $retrievedFiles = glob($expectedDestination . '/*.xml');
+        $retrievedFiles = glob($expectedDestination . '/*.xml') ?: [];
         $this->assertCount($expectedCountRetrievedFiles, $retrievedFiles);
         foreach ($retrievedFiles as $retrievedFile) {
             $this->assertContains($retrievedFile, $history);

@@ -132,7 +132,7 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
         if (false !== $this->urlParts($url)) {
             return $url;
         }
-        $currentParts = $this->urlParts($currentUrl);
+        $currentParts = $this->urlParts($currentUrl) ?: [];
         $currentParts['port'] = (isset($currentParts['port'])) ? ':' . $currentParts['port'] : '';
         return implode('', [
             $currentParts['scheme'],
