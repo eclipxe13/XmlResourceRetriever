@@ -1,20 +1,12 @@
 language: php
 
+dist: xenial
+
 # php compatibility
-php:
-  - 7.0
-  - 7.1
-  - 7.2
-
-# This triggers builds to run on the new TravisCI infrastructure.
-# See: http://docs.travis-ci.com/user/workers/container-based-infrastructure/
-sudo: false
-
-env:
-- FULL_BUILD_PHP_VERSION="7.0"
+php: ["7.0", "7.1", "7.2", "7.3", "7.4"]
 
 before_script:
-  - phpenv config-rm xdebug.ini
+  - phpenv config-rm xdebug.ini || true
   - travis_retry composer install --no-interaction --no-progress --prefer-dist
 
 script:
@@ -22,20 +14,9 @@ script:
   - vendor/bin/phplint
   - vendor/bin/phpcs -sp src/ tests/
   - vendor/bin/php-cs-fixer fix --using-cache=no --dry-run --verbose
-  - |
-    if [[ $TRAVIS_PHP_VERSION == $FULL_BUILD_PHP_VERSION ]]; then
-      php -dzend_extension=xdebug.so vendor/bin/phpunit --coverage-text --coverage-clover=build/tests/coverage.xml
-    else
-      vendor/bin/phpunit
-    fi
+  - vendor/bin/phpunit --verbose
   - vendor/bin/phpstan analyze --level max src/ tests/
 
-after_script:
-  - |
-    if [[ $TRAVIS_PHP_VERSION == '7.0' ]]; then
-      wget https://scrutinizer-ci.com/ocular.phar
-      php ocular.phar code-coverage:upload --format=php-clover build/tests/coverage.xml
-    fi
-
 notifications:
-  email: false
+  email:
+    if: branch = master
