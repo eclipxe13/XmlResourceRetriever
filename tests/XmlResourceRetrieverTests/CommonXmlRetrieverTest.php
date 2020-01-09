@@ -1,8 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace XmlResourceRetrieverTests;
 
+use Exception;
+use InvalidArgumentException;
+use RuntimeException;
+use UnexpectedValueException;
 use XmlResourceRetriever\Downloader\DownloaderInterface;
 use XmlResourceRetriever\RetrieverInterface;
 
@@ -12,7 +17,7 @@ use XmlResourceRetriever\RetrieverInterface;
  *
  * @package XmlResourceRetrieverTests
  */
-class CommonXmlRetrieverTest extends RetrieverTestCase
+final class CommonXmlRetrieverTest extends RetrieverTestCase
 {
     public function testConstructMinimal()
     {
@@ -40,7 +45,7 @@ class CommonXmlRetrieverTest extends RetrieverTestCase
     {
         $retriever = new CommonXmlRetriever('foo');
 
-        $this->expectException(\UnexpectedValueException::class);
+        $this->expectException(UnexpectedValueException::class);
         $this->expectExceptionMessage('The argument to download is empty');
 
         $retriever->download('');
@@ -74,7 +79,7 @@ class CommonXmlRetrieverTest extends RetrieverTestCase
         $remote = 'http://localhost:8999/other/empty.xml';
         $retriever = new CommonXmlRetriever($localPath);
 
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('it is empty');
         $retriever->download($remote);
     }
@@ -94,8 +99,8 @@ class CommonXmlRetrieverTest extends RetrieverTestCase
         $raisedException = false;
         try {
             $retriever->download($remote);
-        } catch (\Exception $ex) {
-            $this->assertInstanceOf(\RuntimeException::class, $ex);
+        } catch (Exception $ex) {
+            $this->assertInstanceOf(RuntimeException::class, $ex);
             $this->assertContains('is not an xml file', $ex->getMessage());
             $raisedException = true;
         }
@@ -113,7 +118,7 @@ class CommonXmlRetrieverTest extends RetrieverTestCase
         $remote = 'http://localhost:8999/non-existent-resource.txt';
         $retriever = new CommonXmlRetriever($localPath);
 
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Unable to download');
         $retriever->download($remote);
     }
@@ -124,7 +129,7 @@ class CommonXmlRetrieverTest extends RetrieverTestCase
         $remote = 'http://localhost:8999/other/sample.xml';
         $retriever = new CommonXmlRetriever($localPath);
 
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Unable to create directory');
         $retriever->download($remote);
     }
@@ -145,7 +150,7 @@ class CommonXmlRetrieverTest extends RetrieverTestCase
         $retriever = new CommonXmlRetriever($localPath);
         $remote = 'http://localhost:8999/other/malformed.xml';
 
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('malformed.xml');
         $retriever->retrieve($remote);
     }
@@ -167,7 +172,7 @@ class CommonXmlRetrieverTest extends RetrieverTestCase
     {
         $retriever = new CommonXmlRetriever('basepath');
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid URL');
         $retriever->buildPath($url);
     }
@@ -204,7 +209,7 @@ class CommonXmlRetrieverTest extends RetrieverTestCase
         $history = $retriever->retrieveHistory();
         $this->assertCount($expectedCountRetrievedFiles, $history);
 
-        $retrievedFiles = glob($expectedDestination . '/*.xml');
+        $retrievedFiles = glob($expectedDestination . '/*.xml') ?: [];
         $this->assertCount($expectedCountRetrievedFiles, $retrievedFiles);
         foreach ($retrievedFiles as $retrievedFile) {
             $this->assertContains($retrievedFile, $history);

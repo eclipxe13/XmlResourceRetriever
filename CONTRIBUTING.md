@@ -75,21 +75,21 @@ If any of these do not pass, it will result in a complete build failure.
 Before you can run these, be sure to `composer install` or `composer update`.
 
 ```shell
-vendor/bin/phplint
 vendor/bin/phpcs -sp src/ tests/
 vendor/bin/php-cs-fixer fix -v --dry-run
 vendor/bin/phpunit
-vendor/bin/phpstan analyze --level max src/ tests/
+vendor/bin/phpstan analyze --no-progress --verbose --level max src/ tests/
+vendor/bin/psalm --no-progress
 ```
 
 There are some tests that require you to download big samples, please read [test/public/README.md] to
-retrieve the more advanced structures from www.sat.gob.mx. 
+retrieve the more advanced structures from `http://www.sat.gob.mx/`. 
 
-## web server instance while running tests
+## Web server instance while running tests
 
 The phpunit process in the bootstrap step uses the PHP built-in web server in port 8999 to serve the contents
 of `tests/public` in order to simulate retrieving contents from internet.
 
-When the phpunit process ends, the web server instance is killed
+When the phpunit process ends, the web server instance is killed.
 
 Take a look in `tests/boostrap.php` to see how this is working.  

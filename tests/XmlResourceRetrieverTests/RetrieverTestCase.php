@@ -1,12 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 namespace XmlResourceRetrieverTests;
 
+use Directory;
+use LogicException;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 abstract class RetrieverTestCase extends TestCase
 {
+    /** @var string */
     private $pathToClear = '';
 
     public function tearDown()
@@ -17,13 +22,13 @@ abstract class RetrieverTestCase extends TestCase
         parent::tearDown();
     }
 
-    protected function pathToClear($path = '')
+    protected function pathToClear(string $path = '')
     {
         if (! $path) {
             return $this->pathToClear;
         }
         if (0 !== strpos($path, $this->buildPath(''))) {
-            throw new \LogicException('Unable to set a path to clear that is not in the build path');
+            throw new LogicException('Unable to set a path to clear that is not in the build path');
         }
         $previousPath = $this->pathToClear;
         $this->pathToClear = $path;
@@ -40,19 +45,19 @@ abstract class RetrieverTestCase extends TestCase
         return dirname(__DIR__, 1) . '/public/' . $path;
     }
 
-    protected function assetPath(string $path)
+    protected function assetPath(string $path): string
     {
         return dirname(__DIR__, 1) . '/assets/' . $path;
     }
 
-    private function deleteDir($dirname)
+    private function deleteDir(string $dirname)
     {
         if (! is_dir($dirname)) {
             return;
         }
         $contents = dir($dirname);
-        if (! $contents instanceof \Directory) {
-            throw new \RuntimeException("Unable to open directory $dirname");
+        if (! $contents instanceof Directory) {
+            throw new RuntimeException("Unable to open directory $dirname");
         }
         while (false !== $location = $contents->read()) {
             if ('..' === $location || '.' === $location) {

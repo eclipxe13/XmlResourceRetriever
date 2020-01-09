@@ -1,17 +1,21 @@
 <?php
+
 declare(strict_types=1);
 
 namespace XmlResourceRetrieverTests\Downloader;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use XmlResourceRetriever\Downloader\PhpDownloader;
 
-class PhpDownloaderTest extends TestCase
+final class PhpDownloaderTest extends TestCase
 {
     public function testConstructorWithoutAttributes()
     {
         $downloader = new PhpDownloader();
-        $this->assertInternalType('resource', $downloader->getContext());
+        $context = $downloader->getContext();
+        $this->assertTrue(is_resource($context));
+        $this->assertSame('stream-context', get_resource_type($context));
     }
 
     public function testConstructorWithAttributes()
@@ -27,9 +31,19 @@ class PhpDownloaderTest extends TestCase
         /** @var resource $isNotResource */
         $isNotResource = null;
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Provided context is not a resource');
         $downloader->setContext($isNotResource);
+    }
+
+    public function testSetContextWithInvalidContextType()
+    {
+        $invalidContext = fopen(__FILE__, 'r');
+        $downloader = new PhpDownloader();
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessageRegExp('/Provided context is not a stream-context resource, given: \S+/');
+        $downloader->setContext($invalidContext);
     }
 
     /**

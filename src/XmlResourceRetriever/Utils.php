@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace XmlResourceRetriever;
@@ -16,7 +17,7 @@ class Utils
     {
         $source = static::simplifyPath($sourceFile);
         $destination = static::simplifyPath($destinationFile);
-        if ($source[0] !== '' && $destination[0] === '') {
+        if ('' !== $source[0] && '' === $destination[0]) {
             return implode('/', $destination);
         }
         // remove the common path
@@ -42,7 +43,7 @@ class Utils
      * Simplify a path and return its parts as an array
      *
      * @param string $path
-     * @return array
+     * @return string[]
      */
     public static function simplifyPath(string $path): array
     {
