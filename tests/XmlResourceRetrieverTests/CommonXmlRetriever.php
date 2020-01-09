@@ -6,7 +6,7 @@ namespace XmlResourceRetrieverTests;
 
 use XmlResourceRetriever\AbstractXmlRetriever;
 
-class CommonXmlRetriever extends AbstractXmlRetriever
+final class CommonXmlRetriever extends AbstractXmlRetriever
 {
     protected function searchNamespace(): string
     {

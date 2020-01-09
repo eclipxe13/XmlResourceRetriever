@@ -6,7 +6,7 @@ namespace XmlResourceRetrieverTests;
 
 use XmlResourceRetriever\XsltRetriever;
 
-class XsltRetrieverTest extends RetrieverTestCase
+final class XsltRetrieverTest extends RetrieverTestCase
 {
     public function testRetrieveRecursive()
     {

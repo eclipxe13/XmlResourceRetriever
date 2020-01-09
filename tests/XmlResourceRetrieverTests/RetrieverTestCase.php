@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace XmlResourceRetrieverTests;
 
+use Directory;
+use LogicException;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 abstract class RetrieverTestCase extends TestCase
 {
@@ -24,7 +27,7 @@ abstract class RetrieverTestCase extends TestCase
             return $this->pathToClear;
         }
         if (0 !== strpos($path, $this->buildPath(''))) {
-            throw new \LogicException('Unable to set a path to clear that is not in the build path');
+            throw new LogicException('Unable to set a path to clear that is not in the build path');
         }
         $previousPath = $this->pathToClear;
         $this->pathToClear = $path;
@@ -52,8 +55,8 @@ abstract class RetrieverTestCase extends TestCase
             return;
         }
         $contents = dir($dirname);
-        if (! $contents instanceof \Directory) {
-            throw new \RuntimeException("Unable to open directory $dirname");
+        if (! $contents instanceof Directory) {
+            throw new RuntimeException("Unable to open directory $dirname");
         }
         while (false !== $location = $contents->read()) {
             if ('..' === $location || '.' === $location) {

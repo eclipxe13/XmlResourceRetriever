@@ -140,7 +140,7 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
         }
         $parsed = parse_url($url);
         if (false === $parsed) {
-            return false;
+            return false; // @codeCoverageIgnore
         }
         return array_map('strval', $parsed);
     }

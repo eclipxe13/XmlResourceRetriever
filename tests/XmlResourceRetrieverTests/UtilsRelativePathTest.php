@@ -7,7 +7,7 @@ namespace XmlResourceRetrieverTests;
 use PHPUnit\Framework\TestCase;
 use XmlResourceRetriever\Utils;
 
-class UtilsRelativePathTest extends TestCase
+final class UtilsRelativePathTest extends TestCase
 {
     public function providerExpectedBehavior()
     {
