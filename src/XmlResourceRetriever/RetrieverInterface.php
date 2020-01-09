@@ -37,7 +37,7 @@ interface RetrieverInterface
      * Returns the history of the last retrive operation
      * The return is an array of key value pairs where the key is the url retrieved and the value is the path
      *
-     * @return array
+     * @return array<string, string>
      */
     public function retrieveHistory(): array;
 

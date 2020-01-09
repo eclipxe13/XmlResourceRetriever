@@ -23,7 +23,7 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
 
     /**
      * This variable stores the list of retrieved resources to avoid infinite recursion
-     * @var array
+     * @var array<string, string>
      */
     private $history = [];
 
@@ -103,6 +103,9 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
         return $localPath;
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function retrieveHistory(): array
     {
         return $this->history;

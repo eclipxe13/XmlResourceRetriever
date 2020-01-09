@@ -1,0 +1,4 @@
+parameters:
+    inferPrivatePropertyTypeFromConstructor: true
+    ignoreErrors:
+        - '#Method XmlResourceRetrieverTests\\\S+ has no return typehint specified.#'

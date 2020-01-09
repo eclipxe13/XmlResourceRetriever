@@ -28,9 +28,11 @@ call_user_func(function () {
     $pid = (int) $output[0];
 
     // Kill the web server when the process ends
-    register_shutdown_function(function () use ($pid) {
+    /** @var callable(): void $shutdownKillPid */
+    $shutdownKillPid = function () use ($pid) {
         exec('kill ' . $pid);
-    });
+    };
+    register_shutdown_function($shutdownKillPid);
     // wait 0.5 seconds to server start before continue
     usleep(50000);
 });

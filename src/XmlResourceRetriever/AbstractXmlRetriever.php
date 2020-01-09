@@ -113,6 +113,7 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
      *
      * @param string $source
      * @param string $path
+     * @return void
      * @throws RuntimeException when the source is not valid
      */
     protected function checkIsValidDownloadedFile(string $source, string $path)

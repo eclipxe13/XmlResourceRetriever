@@ -11,6 +11,7 @@ use RuntimeException;
 
 abstract class RetrieverTestCase extends TestCase
 {
+    /** @var string */
     private $pathToClear = '';
 
     public function tearDown()
@@ -21,7 +22,7 @@ abstract class RetrieverTestCase extends TestCase
         parent::tearDown();
     }
 
-    protected function pathToClear($path = '')
+    protected function pathToClear(string $path = '')
     {
         if (! $path) {
             return $this->pathToClear;
@@ -44,12 +45,12 @@ abstract class RetrieverTestCase extends TestCase
         return dirname(__DIR__, 1) . '/public/' . $path;
     }
 
-    protected function assetPath(string $path)
+    protected function assetPath(string $path): string
     {
         return dirname(__DIR__, 1) . '/assets/' . $path;
     }
 
-    private function deleteDir($dirname)
+    private function deleteDir(string $dirname)
     {
         if (! is_dir($dirname)) {
             return;
