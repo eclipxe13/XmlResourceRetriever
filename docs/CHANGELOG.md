@@ -2,6 +2,20 @@
 
 Notice: This library follows [SEMVER 2.0.0](https://semver.org/spec/v2.0.0.html) convention.
 
+## Version 1.3.1 2020-01-08
+
+This is a development maintenance version.
+
+- Add `ext-filter` to dependences.
+- Update license year.
+- Add Travis-CI PHP versions 7.3 & 7.4.
+- Add development scripts
+- Change `phpstan/phpstan-shim` to `phpstan/phpstan` and add `^0.12`. Minimal code changes to fix minor issues.
+- Add `vimeo/psalm` using level 1. Minimal code changes to fix minor issues.
+- Reformat document files.
+- Verify resource type is `stream-context` when set to `PhpDownloader`.
+- Test cases are abstract, test classes are final.
+
 ## Version 1.3.0 2018-10-18
 
 - Improve `XmlResourceRetriever\AbstractBaseRetriever::urlParts`
