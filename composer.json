@@ -13,6 +13,7 @@
     ],
     "require": {
         "php": ">=7.0",
+        "ext-filter": "*",
         "ext-fileinfo": "*",
         "ext-dom": "*",
         "ext-xml": "*"
