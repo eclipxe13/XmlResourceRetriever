@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace XmlResourceRetriever\Downloader;
 
+use Exception;
+use InvalidArgumentException;
+use RuntimeException;
+
 class PhpDownloader implements DownloaderInterface
 {
     /** @var resource */
@@ -36,10 +40,10 @@ class PhpDownloader implements DownloaderInterface
     public function setContext($context)
     {
         if (! is_resource($context)) {
-            throw new \InvalidArgumentException('Provided context is not a resource');
+            throw new InvalidArgumentException('Provided context is not a resource');
         }
         if ('stream-context' !== get_resource_type($context)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('Provided context is not a stream-context resource, given: %s', get_resource_type($context))
             );
         }
@@ -58,9 +62,9 @@ class PhpDownloader implements DownloaderInterface
         if (! @copy($source, $destination, $this->getContext())) {
             $previousException = null;
             if (null !== $lastError = error_get_last()) {
-                $previousException = new \Exception($lastError['message']);
+                $previousException = new Exception($lastError['message']);
             }
-            throw new \RuntimeException("Unable to download $source to $destination", 0, $previousException);
+            throw new RuntimeException("Unable to download $source to $destination", 0, $previousException);
         }
     }
 }

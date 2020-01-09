@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace XmlResourceRetriever;
 
 use DOMDocument;
+use DOMElement;
+use finfo;
+use RuntimeException;
 
 /**
  * This is an abstract implementation of Retriever interface when working with XML contents
@@ -50,7 +53,7 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
         /** @noinspection PhpUsageOfSilenceOperatorInspection */
         if (false === @$document->load($localFilename)) {
             unlink($localFilename);
-            throw new \RuntimeException("The source $resource contains errors");
+            throw new RuntimeException("The source $resource contains errors");
         }
 
         // call recursive get searching on specified the elements
@@ -84,7 +87,7 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
         $modified = false;
         $elements = $document->getElementsByTagNameNS($this->searchNamespace(), $tagName);
         foreach ($elements as $element) {
-            /** @var \DOMElement $element */
+            /** @var DOMElement $element */
             if (! $element->hasAttribute($attributeName)) {
                 continue;
             }
@@ -110,20 +113,20 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
      *
      * @param string $source
      * @param string $path
-     * @throws \RuntimeException when the source is not valid
+     * @throws RuntimeException when the source is not valid
      */
     protected function checkIsValidDownloadedFile(string $source, string $path)
     {
         // check content is not empty
         if (0 === (int) filesize($path)) {
             unlink($path);
-            throw new \RuntimeException("The source $source is not an xml file because it is empty");
+            throw new RuntimeException("The source $source is not an xml file because it is empty");
         }
         // check content is xml
-        $mimetype = (new \finfo())->file($path, FILEINFO_MIME_TYPE);
+        $mimetype = (new finfo())->file($path, FILEINFO_MIME_TYPE);
         if (! in_array($mimetype, ['text/xml', 'application/xml'])) {
             unlink($path);
-            throw new \RuntimeException("The source $source ($mimetype) is not an xml file");
+            throw new RuntimeException("The source $source ($mimetype) is not an xml file");
         }
     }
 
