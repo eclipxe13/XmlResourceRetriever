@@ -101,14 +101,14 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
             $retriever->download($remote);
         } catch (Exception $ex) {
             $this->assertInstanceOf(RuntimeException::class, $ex);
-            $this->assertContains('is not an xml file', $ex->getMessage());
+            $this->assertStringContainsString('is not an xml file', $ex->getMessage());
             $raisedException = true;
         }
         $this->assertTrue($raisedException, 'The exception on download was not raised');
 
         // assert that the file does not exists (even if it was downloaded)
         $local = $retriever->buildPath($remote);
-        $this->assertFileNotExists($local);
+        $this->assertFileDoesNotExist($local);
     }
 
     public function testDownloadNonExistent()
@@ -200,7 +200,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         ];
         $expectedCountRetrievedFiles = count($expectedRetrievedFiles);
 
-        $this->assertDirectoryNotExists($localPath, "The path $localPath must not exists to run this test");
+        $this->assertDirectoryDoesNotExist($localPath, "The path $localPath must not exists to run this test");
 
         $retriever = new CommonXmlRetriever($localPath);
         $expectedDestination = dirname($retriever->buildPath($remoteParent));

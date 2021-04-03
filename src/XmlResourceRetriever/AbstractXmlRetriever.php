@@ -112,21 +112,21 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
      * is a valid resource, if not will remove the file and throw an exception
      *
      * @param string $source
-     * @param string $path
+     * @param string $localpath
      * @return void
      * @throws RuntimeException when the source is not valid
      */
-    protected function checkIsValidDownloadedFile(string $source, string $path)
+    protected function checkIsValidDownloadedFile(string $source, string $localpath)
     {
         // check content is not empty
-        if (0 === (int) filesize($path)) {
-            unlink($path);
+        if (0 === (int) filesize($localpath)) {
+            unlink($localpath);
             throw new RuntimeException("The source $source is not an xml file because it is empty");
         }
         // check content is xml
-        $mimetype = (new finfo())->file($path, FILEINFO_MIME_TYPE);
+        $mimetype = (new finfo())->file($localpath, FILEINFO_MIME_TYPE);
         if (! in_array($mimetype, ['text/xml', 'application/xml'])) {
-            unlink($path);
+            unlink($localpath);
             throw new RuntimeException("The source $source ($mimetype) is not an xml file");
         }
     }

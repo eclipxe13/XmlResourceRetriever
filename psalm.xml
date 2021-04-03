@@ -15,5 +15,11 @@
 
     <issueHandlers>
         <LessSpecificReturnType errorLevel="info" />
+          <PropertyNotSetInConstructor>
+    <errorLevel type="suppress">
+        <referencedProperty name="XmlResourceRetriever\AbstractBaseRetriever::$downloader" />
+        <referencedProperty name="XmlResourceRetriever\Downloader\PhpDownloader::$context" />
+    </errorLevel>
+  </PropertyNotSetInConstructor>
     </issueHandlers>
 </psalm>

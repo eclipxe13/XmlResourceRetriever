@@ -42,7 +42,7 @@ final class PhpDownloaderTest extends TestCase
         $downloader = new PhpDownloader();
 
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessageRegExp('/Provided context is not a stream-context resource, given: \S+/');
+        $this->expectExceptionMessageMatches('/Provided context is not a stream-context resource, given: \S+/');
         $downloader->setContext($invalidContext);
     }
 
@@ -60,7 +60,7 @@ final class PhpDownloaderTest extends TestCase
         $downloader->setContext($context);
         $downloadPath = tempnam('', '') ?: (__DIR__ . '/deleteme.txt');
         $downloader->downloadTo($url, $downloadPath);
-        $this->assertContains('00001000000406258094', file_get_contents($downloadPath));
+        $this->assertStringContainsString('00001000000406258094', (string) file_get_contents($downloadPath));
         unlink($downloadPath);
     }
 }
