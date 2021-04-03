@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Rector\CodeQuality\Rector\Assign\CombinedAssignRector;
 use Rector\Core\Configuration\Option;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\SetList;
@@ -21,5 +22,11 @@ return static function (ContainerConfigurator $containerConfigurator) {
         PHPUnitSetList::PHPUNIT_80,
         PHPUnitSetList::PHPUNIT_90,
         PHPUnitSetList::PHPUNIT_91,
+        SetList::CODE_QUALITY,
+        SetList::CODE_QUALITY_STRICT,
+    ]);
+
+    $parameters->set(Option::SKIP, [
+        CombinedAssignRector::class,
     ]);
 };

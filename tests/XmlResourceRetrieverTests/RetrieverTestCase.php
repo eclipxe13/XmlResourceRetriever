@@ -24,7 +24,7 @@ abstract class RetrieverTestCase extends TestCase
 
     protected function pathToClear(string $path = '')
     {
-        if (! $path) {
+        if ('' === $path) {
             return $this->pathToClear;
         }
         if (0 !== strpos($path, $this->buildPath(''))) {

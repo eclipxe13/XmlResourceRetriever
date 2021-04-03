@@ -51,7 +51,8 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
         // this error silenced call is intentional,
         // don't need to change the value of libxml_use_internal_errors for this
         /** @noinspection PhpUsageOfSilenceOperatorInspection */
-        if (false === @$document->load($localFilename)) {
+        $documentLoad = @$document->load($localFilename);
+        if (false === $documentLoad) {
             unlink($localFilename);
             throw new RuntimeException("The source $resource contains errors");
         }
