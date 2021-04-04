@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetriever;
+namespace Eclipxe\XmlResourceRetriever;
 
+use Eclipxe\XmlResourceRetriever\Downloader\DownloaderInterface;
+use Eclipxe\XmlResourceRetriever\Downloader\PhpDownloader;
 use InvalidArgumentException;
 use RuntimeException;
 use UnexpectedValueException;
-use XmlResourceRetriever\Downloader\DownloaderInterface;
-use XmlResourceRetriever\Downloader\PhpDownloader;
 
 /**
  * This is an abstract base imlementation of RetrieverInterface

@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetrieverTests;
+namespace Eclipxe\XmlResourceRetriever\Tests\Unit;
 
+use Eclipxe\XmlResourceRetriever\Downloader\DownloaderInterface;
+use Eclipxe\XmlResourceRetriever\RetrieverInterface;
 use Exception;
 use InvalidArgumentException;
 use RuntimeException;
 use UnexpectedValueException;
-use XmlResourceRetriever\Downloader\DownloaderInterface;
-use XmlResourceRetriever\RetrieverInterface;
 
 /**
  * This test case is using CommonXmlRetriever as base to
  * test the methods on AbstractXmlRetriever
  *
- * @package XmlResourceRetrieverTests
+ * @package Eclipxe\XmlResourceRetriever\Tests\Unit
  */
 final class CommonXmlRetrieverTest extends RetrieverTestCase
 {

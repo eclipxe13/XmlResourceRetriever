@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetriever;
+namespace Eclipxe\XmlResourceRetriever;
 
 class XsdRetriever extends AbstractXmlRetriever
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetriever;
+namespace Eclipxe\XmlResourceRetriever;
 
 /**
  * @deprecated Will be removed in version 2, use AbstractXmlRetriever instead

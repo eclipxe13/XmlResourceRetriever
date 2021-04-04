@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "XmlResourceRetriever\\": "src/XmlResourceRetriever/"
+            "Eclipxe\\XmlResourceRetriever\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "XmlResourceRetrieverTests\\": "tests/XmlResourceRetrieverTests/"
+            "Eclipxe\\XmlResourceRetriever\\Tests\\": "tests/"
         }
     },
     "scripts": {

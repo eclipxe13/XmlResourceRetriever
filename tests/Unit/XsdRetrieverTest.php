@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetrieverTests;
+namespace Eclipxe\XmlResourceRetriever\Tests\Unit;
 
-use XmlResourceRetriever\XsdRetriever;
+use Eclipxe\XmlResourceRetriever\XsdRetriever;
 
 final class XsdRetrieverTest extends RetrieverTestCase
 {

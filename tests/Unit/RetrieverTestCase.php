@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetrieverTests;
+namespace Eclipxe\XmlResourceRetriever\Tests\Unit;
 
 use Directory;
 use LogicException;

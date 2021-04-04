@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetrieverTests;
+namespace Eclipxe\XmlResourceRetriever\Tests\Unit;
 
-use XmlResourceRetriever\AbstractXmlRetriever;
+use Eclipxe\XmlResourceRetriever\AbstractXmlRetriever;
 
 final class CommonXmlRetriever extends AbstractXmlRetriever
 {

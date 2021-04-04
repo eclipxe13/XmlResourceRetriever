@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetrieverTests;
+namespace Eclipxe\XmlResourceRetriever\Tests\Unit;
 
+use Eclipxe\XmlResourceRetriever\Utils;
 use PHPUnit\Framework\TestCase;
-use XmlResourceRetriever\Utils;
 
 final class UtilsSimplifyPathTest extends TestCase
 {

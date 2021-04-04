@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetriever\Downloader;
+namespace Eclipxe\XmlResourceRetriever\Downloader;
 
 use Exception;
 use InvalidArgumentException;

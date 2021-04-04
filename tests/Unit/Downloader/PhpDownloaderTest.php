@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetrieverTests\Downloader;
+namespace Eclipxe\XmlResourceRetriever\Tests\Unit\Downloader;
 
+use Eclipxe\XmlResourceRetriever\Downloader\PhpDownloader;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use XmlResourceRetriever\Downloader\PhpDownloader;
 
 final class PhpDownloaderTest extends TestCase
 {
