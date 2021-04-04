@@ -88,7 +88,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
     {
         $localPath = $this->buildPath('other');
         $this->pathToClear($localPath);
-        $remote = 'http://localhost:8999/other/sample.txt';
+        $remote = 'http://localhost:8999/other/sample.gz';
         $retriever = new CommonXmlRetriever($localPath);
 
         /*
@@ -134,25 +134,59 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $retriever->download($remote);
     }
 
-    public function testDownloadMalformed(): void
+    /** @return array<string, array{0: string}> */
+    public function providerRetrieveXmlValidCases(): array
     {
-        $localPath = $this->buildPath('malformed');
-        $this->pathToClear($localPath);
-        $retriever = new CommonXmlRetriever($localPath);
-        $remote = 'http://localhost:8999/other/malformed.xml';
-        $this->assertNotEmpty($retriever->download($remote));
+        return [
+            'xml correct' => ['http://localhost:8999/other/sample.xml'],
+            'xml without header' => ['http://localhost:8999/other/xml-without-header.xml'],
+        ];
     }
 
-    public function testRetrieveMalformed(): void
+    /**
+     * @param string $remote
+     * @dataProvider providerRetrieveXmlValidCases
+     */
+    public function testRetrieveXmlValidCases(string $remote): void
+    {
+        $localPath = $this->buildPath('sample');
+        $this->pathToClear($localPath);
+        $retriever = new CommonXmlRetriever($localPath);
+        $this->assertNotEmpty($retriever->retrieve($remote));
+    }
+
+    /** @return array<string, array{0: string}> */
+    public function providerRetrieveXmlWithErrors(): array
+    {
+        return [
+            'xml with just header' => ['http://localhost:8999/other/xml-just-header.xml'],
+            'xml malformed' => ['http://localhost:8999/other/malformed.xml'],
+        ];
+    }
+
+    /**
+     * A malformed XML can be downloaded but not retrieved
+     *
+     * @param string $remote
+     * @dataProvider providerRetrieveXmlWithErrors
+     */
+    public function testRetrieveXmlWithErrors(string $remote): void
     {
         $localPath = $this->buildPath('malformed');
         $this->pathToClear($localPath);
         $retriever = new CommonXmlRetriever($localPath);
-        $remote = 'http://localhost:8999/other/malformed.xml';
 
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('malformed.xml');
-        $retriever->retrieve($remote);
+        $raisedException = false;
+        try {
+            $retriever->retrieve($remote);
+        } catch (Exception $ex) {
+            $this->assertInstanceOf(RuntimeException::class, $ex);
+            $this->assertStringContainsString('contains errors', $ex->getMessage());
+            $raisedException = true;
+        }
+        $this->assertTrue($raisedException, 'The exception on download was not raised');
+        $local = $retriever->buildPath($remote);
+        $this->assertFileDoesNotExist($local, "The file $local must not exists");
     }
 
     /**
