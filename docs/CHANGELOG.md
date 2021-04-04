@@ -2,6 +2,12 @@
 
 Notice: This library follows [SEMVER 2.0.0](https://semver.org/spec/v2.0.0.html) convention.
 
+## Version 2.0.0 2021-04-03
+
+- This version changes the namespace to `Eclipxe\XmlResourceRetriever`.
+- The deprecated class `AbstractRetriever` has been removed.
+- On `AbstractBaseRetriever` file types `text/` are downloaded and removed if they fail to load.
+
 ## Version 1.3.1 2020-01-08
 
 This is a development maintenance version.

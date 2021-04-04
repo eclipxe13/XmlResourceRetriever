@@ -51,7 +51,7 @@ jobs:
         run: vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
 
       - name: Unit tests (phpunit)
-        run: vendor/bin/phpunit tests/Unit/ --testdox --verbose
+        run: vendor/bin/phpunit --testdox --verbose
 
       - name: Code analysis (phpstan)
         run: vendor/bin/phpstan analyse --no-progress --verbose
