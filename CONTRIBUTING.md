@@ -15,7 +15,7 @@ By participating in this project and its community, you are expected to uphold t
 
 You can find help and discussion in the following places:
 
-* GitHub Issues: <https://github.com/eclipxe13/XmlResourceRetriever/issues>
+* GitHub Issues: <https://github.com/eclipxe13/Eclipxe\XmlResourceRetriever/issues>
 
 ## Reporting Bugs
 
@@ -75,20 +75,20 @@ If any of these do not pass, it will result in a complete build failure.
 Before you can run these, be sure to `composer install` or `composer update`.
 
 ```shell
-vendor/bin/phpcs -sp src/ tests/
-vendor/bin/php-cs-fixer fix -v --dry-run
-vendor/bin/phpunit
-vendor/bin/phpstan analyze --no-progress --verbose --level max src/ tests/
-vendor/bin/psalm --no-progress
+vendor/bin/phpcs -sp
+vendor/bin/php-cs-fixer fix --dry-run -v
+vendor/bin/phpunit --testdox
+vendor/bin/phpstan analyze
+vendor/bin/psalm
 ```
 
-There are some tests that require you to download big samples, please read [test/public/README.md] to
-retrieve the more advanced structures from `http://www.sat.gob.mx/`. 
+There are some tests that require you to download big samples, please read [tests/public/README.md](tests/public/README.md) to
+retrieve the more complex structures from `https://www.sat.gob.mx/`. 
 
 ## Web server instance while running tests
 
-The phpunit process in the bootstrap step uses the PHP built-in web server in port 8999 to serve the contents
-of `tests/public` in order to simulate retrieving contents from internet.
+The phpunit process in the bootstrap step uses the PHP built-in web server in port `8999` to serve the contents
+of `tests/public` in order to simulate retrieving contents from the internet.
 
 When the phpunit process ends, the web server instance is killed.
 

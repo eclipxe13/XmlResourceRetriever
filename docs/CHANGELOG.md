@@ -18,10 +18,10 @@ This is a development maintenance version.
 
 ## Version 1.3.0 2018-10-18
 
-- Improve `XmlResourceRetriever\AbstractBaseRetriever::urlParts`
+- Improve `Eclipxe\XmlResourceRetriever\AbstractBaseRetriever::urlParts`
     - Remove deprecated useless constants `FILTER_FLAG_SCHEME_REQUIRED` or `FILTER_FLAG_HOST_REQUIRED`
     - Add docblocks
-- Add stream context features to `XmlResourceRetriever\Downloader\PhpDownloader` and tests
+- Add stream context features to `Eclipxe\XmlResourceRetriever\Downloader\PhpDownloader` and tests
 - Add strict_types to all project
 - Improve configuration file for php-cs-fixer tool
 

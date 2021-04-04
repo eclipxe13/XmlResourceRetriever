@@ -81,7 +81,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [source]: https://github.com/eclipxe13/XmlResourceRetriever
 [release]: https://github.com/eclipxe13/XmlResourceRetriever/releases
 [license]: https://github.com/eclipxe13/XmlResourceRetriever/blob/master/LICENSE
-[build]: https://travis-ci.org/eclipxe13/XmlResourceRetriever?branch=master
+[build]: https://github.com/eclipxe13/XmlResourceRetriever/actions/workflows/build.yml?query=branch:master
 [quality]: https://scrutinizer-ci.com/g/eclipxe13/XmlResourceRetriever/
 [coverage]: https://scrutinizer-ci.com/g/eclipxe13/XmlResourceRetriever/code-structure/master/code-coverage
 [downloads]: https://packagist.org/packages/eclipxe/XmlResourceRetriever
@@ -89,7 +89,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [badge-source]: https://img.shields.io/badge/source-eclipxe13/XmlResourceRetriever-blue.svg?style=flat-square
 [badge-release]: https://img.shields.io/github/release/eclipxe13/XmlResourceRetriever.svg?style=flat-square
 [badge-license]: https://img.shields.io/github/license/eclipxe13/XmlResourceRetriever.svg?style=flat-square
-[badge-build]: https://img.shields.io/travis/eclipxe13/XmlResourceRetriever/master.svg?style=flat-square
+[badge-build]: https://img.shields.io/github/workflow/status/eclipxe13/XmlResourceRetriever/build/master?style=flat-square
 [badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/XmlResourceRetriever/master.svg?style=flat-square
 [badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/XmlResourceRetriever/master.svg?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/XmlResourceRetriever.svg?style=flat-square
