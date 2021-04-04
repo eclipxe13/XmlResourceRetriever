@@ -32,10 +32,10 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
      */
     abstract protected function searchElements(): array;
 
-    public function retrieve(string $resource): string
+    public function retrieve(string $url): string
     {
         $this->clearHistory();
-        return $this->doRetrieve($resource);
+        return $this->doRetrieve($url);
     }
 
     /**
