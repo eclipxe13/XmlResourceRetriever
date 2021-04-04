@@ -10,7 +10,7 @@ use XmlResourceRetriever\Downloader\PhpDownloader;
 
 final class PhpDownloaderTest extends TestCase
 {
-    public function testConstructorWithoutAttributes()
+    public function testConstructorWithoutAttributes(): void
     {
         $downloader = new PhpDownloader();
         $context = $downloader->getContext();
@@ -18,14 +18,14 @@ final class PhpDownloaderTest extends TestCase
         $this->assertSame('stream-context', get_resource_type($context));
     }
 
-    public function testConstructorWithAttributes()
+    public function testConstructorWithAttributes(): void
     {
         $context = stream_context_create();
         $downloader = new PhpDownloader($context);
         $this->assertSame($context, $downloader->getContext());
     }
 
-    public function testSetContextThrowsExceptionWithInvalidParameter()
+    public function testSetContextThrowsExceptionWithInvalidParameter(): void
     {
         $downloader = new PhpDownloader();
         /** @var resource $isNotResource */
@@ -36,7 +36,7 @@ final class PhpDownloaderTest extends TestCase
         $downloader->setContext($isNotResource);
     }
 
-    public function testSetContextWithInvalidContextType()
+    public function testSetContextWithInvalidContextType(): void
     {
         $invalidContext = fopen(__FILE__, 'r');
         $downloader = new PhpDownloader();
@@ -50,7 +50,7 @@ final class PhpDownloaderTest extends TestCase
      * This test is made to check if can download from https://rdc.sat.gob.mx/ since it is
      * failing from Sept/2018 delivering an expired certificate
      */
-    public function testDownloadFromRdcSatGobMxInsecure()
+    public function testDownloadFromRdcSatGobMxInsecure(): void
     {
         $url = 'https://rdc.sat.gob.mx/rccf/000010/000004/06/25/80/00001000000406258094.cer';
         $downloader = new PhpDownloader();

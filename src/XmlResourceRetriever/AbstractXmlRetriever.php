@@ -117,7 +117,7 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
      * @return void
      * @throws RuntimeException when the source is not valid
      */
-    protected function checkIsValidDownloadedFile(string $source, string $localpath)
+    protected function checkIsValidDownloadedFile(string $source, string $localpath): void
     {
         // check content is not empty
         if (0 === (int) filesize($localpath)) {

@@ -9,7 +9,7 @@ error_reporting(-1);
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // create php web server for local resources
-call_user_func(function () {
+call_user_func(function (): void {
     // Command that starts the built-in web server
     $command = sprintf(
         'php -S %s:%d -t %s >/dev/null 2>&1 & echo $!',
@@ -29,7 +29,7 @@ call_user_func(function () {
 
     // Kill the web server when the process ends
     /** @var callable(): void $shutdownKillPid */
-    $shutdownKillPid = function () use ($pid) {
+    $shutdownKillPid = function () use ($pid): void {
         exec('kill ' . $pid);
     };
     register_shutdown_function($shutdownKillPid);

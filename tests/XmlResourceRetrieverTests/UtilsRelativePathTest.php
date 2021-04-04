@@ -9,7 +9,10 @@ use XmlResourceRetriever\Utils;
 
 final class UtilsRelativePathTest extends TestCase
 {
-    public function providerExpectedBehavior()
+    /**
+     * @return array<string, string[]>
+     */
+    public function providerExpectedBehavior(): array
     {
         return [
             'absolutes' => ['/h/u/schemas/structs/foo.xml', '/h/u/schemas/entity/money.xml', '../entity/money.xml'],
@@ -29,7 +32,7 @@ final class UtilsRelativePathTest extends TestCase
      * @param string $expected
      * @dataProvider providerExpectedBehavior
      */
-    public function testExpectedBehavior(string $source, string $destination, string $expected)
+    public function testExpectedBehavior(string $source, string $destination, string $expected): void
     {
         $this->assertEquals($expected, Utils::relativePath($source, $destination));
     }

@@ -8,7 +8,7 @@ use XmlResourceRetriever\XsltRetriever;
 
 final class XsltRetrieverTest extends RetrieverTestCase
 {
-    public function testRetrieveRecursive()
+    public function testRetrieveRecursive(): void
     {
         $localPath = $this->buildPath('recursive');
         $this->pathToClear($localPath);
@@ -29,7 +29,7 @@ final class XsltRetrieverTest extends RetrieverTestCase
         $this->assertXmlFileEqualsXmlFile($local, $this->assetPath('expected-ticket.xslt'));
     }
 
-    public function testRetrieveComplexStructure()
+    public function testRetrieveComplexStructure(): void
     {
         if (! is_dir($this->publicPath('www.sat.gob.mx'))) {
             $this->markTestSkipped('Must download complex structures from www.sat.gob.mx');

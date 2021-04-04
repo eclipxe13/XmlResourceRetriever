@@ -36,7 +36,7 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
      * @throws \RuntimeException when the source is not valid
      * @return void
      */
-    abstract protected function checkIsValidDownloadedFile(string $source, string $localpath);
+    abstract protected function checkIsValidDownloadedFile(string $source, string $localpath): void;
 
     /**
      * Retriever constructor.
@@ -64,7 +64,7 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
      * @param DownloaderInterface $downloader
      * @return void
      */
-    public function setDownloader(DownloaderInterface $downloader)
+    public function setDownloader(DownloaderInterface $downloader): void
     {
         $this->downloader = $downloader;
     }
@@ -114,7 +114,7 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
     /**
      * @return void
      */
-    protected function clearHistory()
+    protected function clearHistory(): void
     {
         $this->history = [];
     }
@@ -124,7 +124,7 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
      * @param string $localpath
      * @return void
      */
-    protected function addToHistory(string $source, string $localpath)
+    protected function addToHistory(string $source, string $localpath): void
     {
         $this->history[$source] = $localpath;
     }

@@ -19,7 +19,7 @@ use XmlResourceRetriever\RetrieverInterface;
  */
 final class CommonXmlRetrieverTest extends RetrieverTestCase
 {
-    public function testConstructMinimal()
+    public function testConstructMinimal(): void
     {
         $retriever = new CommonXmlRetriever('foo');
         $this->assertInstanceOf(RetrieverInterface::class, $retriever);
@@ -27,13 +27,13 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $this->assertInstanceOf(DownloaderInterface::class, $retriever->getDownloader());
     }
 
-    public function testBasePath()
+    public function testBasePath(): void
     {
         $retriever = new CommonXmlRetriever(__DIR__);
         $this->assertEquals(__DIR__, $retriever->getBasePath());
     }
 
-    public function testBuildPath()
+    public function testBuildPath(): void
     {
         $retriever = new CommonXmlRetriever('..');
         $url = 'http://example.org/some/file.txt';
@@ -41,7 +41,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $this->assertEquals($expectedPath, $retriever->buildPath($url));
     }
 
-    public function testDownloadThrowsExceptionOnEmptyString()
+    public function testDownloadThrowsExceptionOnEmptyString(): void
     {
         $retriever = new CommonXmlRetriever('foo');
 
@@ -51,7 +51,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $retriever->download('');
     }
 
-    public function testDownloadSimpleCase()
+    public function testDownloadSimpleCase(): void
     {
         $localPath = $this->buildPath('foo');
         $this->pathToClear($localPath);
@@ -72,7 +72,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $this->assertXmlFileEqualsXmlFile($public, $downloaded);
     }
 
-    public function testDownloadThrowsExceptionOnEmptyFile()
+    public function testDownloadThrowsExceptionOnEmptyFile(): void
     {
         $localPath = $this->buildPath('empty');
         $this->pathToClear($localPath);
@@ -84,7 +84,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $retriever->download($remote);
     }
 
-    public function testDownloadNotAnXmlFileThrowsAnExceptionAndRemoveTheFile()
+    public function testDownloadNotAnXmlFileThrowsAnExceptionAndRemoveTheFile(): void
     {
         $localPath = $this->buildPath('other');
         $this->pathToClear($localPath);
@@ -111,7 +111,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $this->assertFileDoesNotExist($local);
     }
 
-    public function testDownloadNonExistent()
+    public function testDownloadNonExistent(): void
     {
         $localPath = $this->buildPath('non-existent');
         $this->pathToClear($localPath);
@@ -123,7 +123,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $retriever->download($remote);
     }
 
-    public function testDownloadToNonWritable()
+    public function testDownloadToNonWritable(): void
     {
         $localPath = '/bin/bash';
         $remote = 'http://localhost:8999/other/sample.xml';
@@ -134,7 +134,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $retriever->download($remote);
     }
 
-    public function testDownloadMalformed()
+    public function testDownloadMalformed(): void
     {
         $localPath = $this->buildPath('malformed');
         $this->pathToClear($localPath);
@@ -143,7 +143,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $this->assertNotEmpty($retriever->download($remote));
     }
 
-    public function testRetrieveMalformed()
+    public function testRetrieveMalformed(): void
     {
         $localPath = $this->buildPath('malformed');
         $this->pathToClear($localPath);
@@ -155,7 +155,10 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $retriever->retrieve($remote);
     }
 
-    public function providerBuildPathWithInvalidUrl()
+    /**
+     * @return array<int, array<string>>
+     */
+    public function providerBuildPathWithInvalidUrl(): array
     {
         return [
             ['scheme://host'],
@@ -168,7 +171,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
      * @param string $url
      * @dataProvider providerBuildPathWithInvalidUrl
      */
-    public function testBuildPathWithInvalidUrl(string $url)
+    public function testBuildPathWithInvalidUrl(string $url): void
     {
         $retriever = new CommonXmlRetriever('basepath');
 
@@ -186,7 +189,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
      * - missing attribute
      * - attribute exists but tag is different
      */
-    public function testRetrieverWithHistory()
+    public function testRetrieverWithHistory(): void
     {
         $localPath = $this->buildPath('common');
         $this->pathToClear($localPath);

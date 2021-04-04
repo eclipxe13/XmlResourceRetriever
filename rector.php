@@ -24,6 +24,8 @@ return static function (ContainerConfigurator $containerConfigurator) {
         PHPUnitSetList::PHPUNIT_91,
         SetList::CODE_QUALITY,
         SetList::CODE_QUALITY_STRICT,
+        SetList::TYPE_DECLARATION,
+        SetList::TYPE_DECLARATION_STRICT,
     ]);
 
     $parameters->set(Option::SKIP, [

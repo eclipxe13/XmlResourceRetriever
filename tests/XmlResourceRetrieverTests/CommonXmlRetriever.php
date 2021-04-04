@@ -13,6 +13,9 @@ final class CommonXmlRetriever extends AbstractXmlRetriever
         return 'http://example.com/ns';
     }
 
+    /**
+     * @return array<int, array<string, string>>
+     */
     protected function searchElements(): array
     {
         return [

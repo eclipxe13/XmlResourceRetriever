@@ -16,13 +16,13 @@ abstract class RetrieverTestCase extends TestCase
 
     public function tearDown(): void
     {
-        if ($this->pathToClear()) {
+        if ('' !== $this->pathToClear()) {
             $this->deleteDir($this->pathToClear());
         }
         parent::tearDown();
     }
 
-    protected function pathToClear(string $path = '')
+    protected function pathToClear(string $path = ''): string
     {
         if ('' === $path) {
             return $this->pathToClear;
@@ -50,7 +50,7 @@ abstract class RetrieverTestCase extends TestCase
         return dirname(__DIR__, 1) . '/assets/' . $path;
     }
 
-    private function deleteDir(string $dirname)
+    private function deleteDir(string $dirname): void
     {
         if (! is_dir($dirname)) {
             return;
