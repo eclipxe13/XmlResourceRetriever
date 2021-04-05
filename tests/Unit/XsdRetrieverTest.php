@@ -32,7 +32,7 @@ final class XsdRetrieverTest extends RetrieverTestCase
     public function testRetrieveComplexStructure(): void
     {
         if (! is_dir($this->publicPath('www.sat.gob.mx'))) {
-            $this->markTestSkipped('Must download complex structures from www.sat.gob.mx');
+            $this->markTestSkipped('Download complex structures from www.sat.gob.mx to run this test');
         }
         $localPath = $this->buildPath('SATXSD');
         $this->pathToClear($localPath);
