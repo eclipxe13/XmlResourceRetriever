@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetriever;
+namespace Eclipxe\XmlResourceRetriever;
 
 use DOMDocument;
 use DOMElement;
@@ -32,10 +32,10 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
      */
     abstract protected function searchElements(): array;
 
-    public function retrieve(string $resource): string
+    public function retrieve(string $url): string
     {
         $this->clearHistory();
-        return $this->doRetrieve($resource);
+        return $this->doRetrieve($url);
     }
 
     /**
@@ -51,7 +51,8 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
         // this error silenced call is intentional,
         // don't need to change the value of libxml_use_internal_errors for this
         /** @noinspection PhpUsageOfSilenceOperatorInspection */
-        if (false === @$document->load($localFilename)) {
+        $documentLoad = @$document->load($localFilename);
+        if (false === $documentLoad) {
             unlink($localFilename);
             throw new RuntimeException("The source $resource contains errors");
         }
@@ -112,21 +113,21 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
      * is a valid resource, if not will remove the file and throw an exception
      *
      * @param string $source
-     * @param string $path
+     * @param string $localpath
      * @return void
      * @throws RuntimeException when the source is not valid
      */
-    protected function checkIsValidDownloadedFile(string $source, string $path)
+    protected function checkIsValidDownloadedFile(string $source, string $localpath): void
     {
         // check content is not empty
-        if (0 === (int) filesize($path)) {
-            unlink($path);
+        if (0 === (int) filesize($localpath)) {
+            unlink($localpath);
             throw new RuntimeException("The source $source is not an xml file because it is empty");
         }
         // check content is xml
-        $mimetype = (new finfo())->file($path, FILEINFO_MIME_TYPE);
-        if (! in_array($mimetype, ['text/xml', 'application/xml'])) {
-            unlink($path);
+        $mimetype = (new finfo())->file($localpath, FILEINFO_MIME_TYPE) ?: '';
+        if ('application/xml' !== $mimetype && 'text/' !== substr($mimetype, 0, 5)) {
+            unlink($localpath);
             throw new RuntimeException("The source $source ($mimetype) is not an xml file");
         }
     }

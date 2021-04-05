@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetrieverTests;
+namespace Eclipxe\XmlResourceRetriever\Tests\Unit;
 
 use Directory;
 use LogicException;
@@ -14,17 +14,17 @@ abstract class RetrieverTestCase extends TestCase
     /** @var string */
     private $pathToClear = '';
 
-    public function tearDown()
+    protected function tearDown(): void
     {
-        if ($this->pathToClear()) {
+        if ('' !== $this->pathToClear()) {
             $this->deleteDir($this->pathToClear());
         }
         parent::tearDown();
     }
 
-    protected function pathToClear(string $path = '')
+    protected function pathToClear(string $path = ''): string
     {
-        if (! $path) {
+        if ('' === $path) {
             return $this->pathToClear;
         }
         if (0 !== strpos($path, $this->buildPath(''))) {
@@ -35,22 +35,22 @@ abstract class RetrieverTestCase extends TestCase
         return $previousPath;
     }
 
-    protected function buildPath(string $path)
+    protected function buildPath(string $path): string
     {
         return dirname(__DIR__, 2) . '/build/tests/' . $path;
     }
 
-    protected function publicPath(string $path)
+    protected function publicPath(string $path): string
     {
-        return dirname(__DIR__, 1) . '/public/' . $path;
+        return dirname(__DIR__) . '/public/' . $path;
     }
 
     protected function assetPath(string $path): string
     {
-        return dirname(__DIR__, 1) . '/assets/' . $path;
+        return dirname(__DIR__) . '/assets/' . $path;
     }
 
-    private function deleteDir(string $dirname)
+    private function deleteDir(string $dirname): void
     {
         if (! is_dir($dirname)) {
             return;

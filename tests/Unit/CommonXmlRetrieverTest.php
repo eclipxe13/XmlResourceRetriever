@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetrieverTests;
+namespace Eclipxe\XmlResourceRetriever\Tests\Unit;
 
+use Eclipxe\XmlResourceRetriever\Downloader\DownloaderInterface;
+use Eclipxe\XmlResourceRetriever\RetrieverInterface;
 use Exception;
 use InvalidArgumentException;
 use RuntimeException;
 use UnexpectedValueException;
-use XmlResourceRetriever\Downloader\DownloaderInterface;
-use XmlResourceRetriever\RetrieverInterface;
 
 /**
  * This test case is using CommonXmlRetriever as base to
  * test the methods on AbstractXmlRetriever
  *
- * @package XmlResourceRetrieverTests
+ * @package Eclipxe\XmlResourceRetriever\Tests\Unit
  */
 final class CommonXmlRetrieverTest extends RetrieverTestCase
 {
-    public function testConstructMinimal()
+    public function testConstructMinimal(): void
     {
         $retriever = new CommonXmlRetriever('foo');
         $this->assertInstanceOf(RetrieverInterface::class, $retriever);
@@ -27,13 +27,13 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $this->assertInstanceOf(DownloaderInterface::class, $retriever->getDownloader());
     }
 
-    public function testBasePath()
+    public function testBasePath(): void
     {
         $retriever = new CommonXmlRetriever(__DIR__);
         $this->assertEquals(__DIR__, $retriever->getBasePath());
     }
 
-    public function testBuildPath()
+    public function testBuildPath(): void
     {
         $retriever = new CommonXmlRetriever('..');
         $url = 'http://example.org/some/file.txt';
@@ -41,7 +41,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $this->assertEquals($expectedPath, $retriever->buildPath($url));
     }
 
-    public function testDownloadThrowsExceptionOnEmptyString()
+    public function testDownloadThrowsExceptionOnEmptyString(): void
     {
         $retriever = new CommonXmlRetriever('foo');
 
@@ -51,7 +51,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $retriever->download('');
     }
 
-    public function testDownloadSimpleCase()
+    public function testDownloadSimpleCase(): void
     {
         $localPath = $this->buildPath('foo');
         $this->pathToClear($localPath);
@@ -72,7 +72,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $this->assertXmlFileEqualsXmlFile($public, $downloaded);
     }
 
-    public function testDownloadThrowsExceptionOnEmptyFile()
+    public function testDownloadThrowsExceptionOnEmptyFile(): void
     {
         $localPath = $this->buildPath('empty');
         $this->pathToClear($localPath);
@@ -84,11 +84,11 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $retriever->download($remote);
     }
 
-    public function testDownloadNotAnXmlFileThrowsAnExceptionAndRemoveTheFile()
+    public function testDownloadNotAnXmlFileThrowsAnExceptionAndRemoveTheFile(): void
     {
         $localPath = $this->buildPath('other');
         $this->pathToClear($localPath);
-        $remote = 'http://localhost:8999/other/sample.txt';
+        $remote = 'http://localhost:8999/other/sample.gz';
         $retriever = new CommonXmlRetriever($localPath);
 
         /*
@@ -101,17 +101,17 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
             $retriever->download($remote);
         } catch (Exception $ex) {
             $this->assertInstanceOf(RuntimeException::class, $ex);
-            $this->assertContains('is not an xml file', $ex->getMessage());
+            $this->assertStringContainsString('is not an xml file', $ex->getMessage());
             $raisedException = true;
         }
         $this->assertTrue($raisedException, 'The exception on download was not raised');
 
         // assert that the file does not exists (even if it was downloaded)
         $local = $retriever->buildPath($remote);
-        $this->assertFileNotExists($local);
+        $this->assertFileDoesNotExist($local);
     }
 
-    public function testDownloadNonExistent()
+    public function testDownloadNonExistent(): void
     {
         $localPath = $this->buildPath('non-existent');
         $this->pathToClear($localPath);
@@ -123,7 +123,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $retriever->download($remote);
     }
 
-    public function testDownloadToNonWritable()
+    public function testDownloadToNonWritable(): void
     {
         $localPath = '/bin/bash';
         $remote = 'http://localhost:8999/other/sample.xml';
@@ -134,28 +134,65 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         $retriever->download($remote);
     }
 
-    public function testDownloadMalformed()
+    /** @return array<string, array{0: string}> */
+    public function providerRetrieveXmlValidCases(): array
+    {
+        return [
+            'xml correct' => ['http://localhost:8999/other/sample.xml'],
+            'xml without header' => ['http://localhost:8999/other/xml-without-header.xml'],
+        ];
+    }
+
+    /**
+     * @param string $remote
+     * @dataProvider providerRetrieveXmlValidCases
+     */
+    public function testRetrieveXmlValidCases(string $remote): void
+    {
+        $localPath = $this->buildPath('sample');
+        $this->pathToClear($localPath);
+        $retriever = new CommonXmlRetriever($localPath);
+        $this->assertNotEmpty($retriever->retrieve($remote));
+    }
+
+    /** @return array<string, array{0: string}> */
+    public function providerRetrieveXmlWithErrors(): array
+    {
+        return [
+            'xml with just header' => ['http://localhost:8999/other/xml-just-header.xml'],
+            'xml malformed' => ['http://localhost:8999/other/malformed.xml'],
+        ];
+    }
+
+    /**
+     * A malformed XML can be downloaded but not retrieved
+     *
+     * @param string $remote
+     * @dataProvider providerRetrieveXmlWithErrors
+     */
+    public function testRetrieveXmlWithErrors(string $remote): void
     {
         $localPath = $this->buildPath('malformed');
         $this->pathToClear($localPath);
         $retriever = new CommonXmlRetriever($localPath);
-        $remote = 'http://localhost:8999/other/malformed.xml';
-        $this->assertNotEmpty($retriever->download($remote));
+
+        $raisedException = false;
+        try {
+            $retriever->retrieve($remote);
+        } catch (Exception $ex) {
+            $this->assertInstanceOf(RuntimeException::class, $ex);
+            $this->assertStringContainsString('contains errors', $ex->getMessage());
+            $raisedException = true;
+        }
+        $this->assertTrue($raisedException, 'The exception on download was not raised');
+        $local = $retriever->buildPath($remote);
+        $this->assertFileDoesNotExist($local, "The file $local must not exists");
     }
 
-    public function testRetrieveMalformed()
-    {
-        $localPath = $this->buildPath('malformed');
-        $this->pathToClear($localPath);
-        $retriever = new CommonXmlRetriever($localPath);
-        $remote = 'http://localhost:8999/other/malformed.xml';
-
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('malformed.xml');
-        $retriever->retrieve($remote);
-    }
-
-    public function providerBuildPathWithInvalidUrl()
+    /**
+     * @return array<int, array<string>>
+     */
+    public function providerBuildPathWithInvalidUrl(): array
     {
         return [
             ['scheme://host'],
@@ -168,7 +205,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
      * @param string $url
      * @dataProvider providerBuildPathWithInvalidUrl
      */
-    public function testBuildPathWithInvalidUrl(string $url)
+    public function testBuildPathWithInvalidUrl(string $url): void
     {
         $retriever = new CommonXmlRetriever('basepath');
 
@@ -186,7 +223,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
      * - missing attribute
      * - attribute exists but tag is different
      */
-    public function testRetrieverWithHistory()
+    public function testRetrieverWithHistory(): void
     {
         $localPath = $this->buildPath('common');
         $this->pathToClear($localPath);
@@ -200,7 +237,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
         ];
         $expectedCountRetrievedFiles = count($expectedRetrievedFiles);
 
-        $this->assertDirectoryNotExists($localPath, "The path $localPath must not exists to run this test");
+        $this->assertDirectoryDoesNotExist($localPath, "The path $localPath must not exists to run this test");
 
         $retriever = new CommonXmlRetriever($localPath);
         $expectedDestination = dirname($retriever->buildPath($remoteParent));

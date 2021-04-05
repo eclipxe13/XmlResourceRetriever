@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetrieverTests;
+namespace Eclipxe\XmlResourceRetriever\Tests\Unit;
 
-use XmlResourceRetriever\XsdRetriever;
+use Eclipxe\XmlResourceRetriever\XsdRetriever;
 
 final class XsdRetrieverTest extends RetrieverTestCase
 {
-    public function testRetrieveRecursive()
+    public function testRetrieveRecursive(): void
     {
         $localPath = $this->buildPath('recursive');
         $this->pathToClear($localPath);
@@ -29,10 +29,10 @@ final class XsdRetrieverTest extends RetrieverTestCase
         $this->assertXmlFileEqualsXmlFile($local, $this->assetPath('expected-ticket.xsd'));
     }
 
-    public function testRetrieveComplexStructure()
+    public function testRetrieveComplexStructure(): void
     {
         if (! is_dir($this->publicPath('www.sat.gob.mx'))) {
-            $this->markTestSkipped('Must download complex structures from www.sat.gob.mx');
+            $this->markTestSkipped('Download complex structures from www.sat.gob.mx to run this test');
         }
         $localPath = $this->buildPath('SATXSD');
         $this->pathToClear($localPath);

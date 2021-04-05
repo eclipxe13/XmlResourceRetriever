@@ -2,14 +2,17 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetrieverTests;
+namespace Eclipxe\XmlResourceRetriever\Tests\Unit;
 
+use Eclipxe\XmlResourceRetriever\Utils;
 use PHPUnit\Framework\TestCase;
-use XmlResourceRetriever\Utils;
 
 final class UtilsSimplifyPathTest extends TestCase
 {
-    public function providerExpectedBehavior()
+    /**
+     * @return array<int, array<string[]|string>>
+     */
+    public function providerExpectedBehavior(): array
     {
         return [
             ['a/b/c/d/e', ['a', 'b', 'c', 'd', 'e']],
@@ -36,7 +39,7 @@ final class UtilsSimplifyPathTest extends TestCase
      * @param string[] $expected
      * @dataProvider providerExpectedBehavior
      */
-    public function testExpectedBehavior(string $source, array $expected)
+    public function testExpectedBehavior(string $source, array $expected): void
     {
         $this->assertEquals($expected, Utils::simplifyPath($source));
     }

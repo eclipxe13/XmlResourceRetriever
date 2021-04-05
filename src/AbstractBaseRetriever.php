@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetriever;
+namespace Eclipxe\XmlResourceRetriever;
 
-use XmlResourceRetriever\Downloader\DownloaderInterface;
-use XmlResourceRetriever\Downloader\PhpDownloader;
+use Eclipxe\XmlResourceRetriever\Downloader\DownloaderInterface;
+use Eclipxe\XmlResourceRetriever\Downloader\PhpDownloader;
+use InvalidArgumentException;
+use RuntimeException;
+use UnexpectedValueException;
 
 /**
  * This is an abstract base imlementation of RetrieverInterface
@@ -33,18 +36,18 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
      *
      * @param string $source
      * @param string $localpath
-     * @throws \RuntimeException when the source is not valid
+     * @throws RuntimeException when the source is not valid
      * @return void
      */
-    abstract protected function checkIsValidDownloadedFile(string $source, string $localpath);
+    abstract protected function checkIsValidDownloadedFile(string $source, string $localpath): void;
 
     /**
      * Retriever constructor.
      *
      * @param string $basePath
-     * @param DownloaderInterface $downloader
+     * @param DownloaderInterface|null $downloader
      */
-    public function __construct($basePath, DownloaderInterface $downloader = null)
+    public function __construct(string $basePath, DownloaderInterface $downloader = null)
     {
         $this->basePath = $basePath;
         $this->setDownloader($downloader ? : new PhpDownloader());
@@ -64,7 +67,7 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
      * @param DownloaderInterface $downloader
      * @return void
      */
-    public function setDownloader(DownloaderInterface $downloader)
+    public function setDownloader(DownloaderInterface $downloader): void
     {
         $this->downloader = $downloader;
     }
@@ -72,33 +75,33 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
     public function buildPath(string $url): string
     {
         if (false === $parts = $this->urlParts($url)) {
-            throw new \InvalidArgumentException("Invalid URL: $url");
+            throw new InvalidArgumentException("Invalid URL: $url");
         }
         return $this->basePath . '/' . $parts['host'] . '/' . ltrim($parts['path'], '/');
     }
 
-    public function download(string $resource): string
+    public function download(string $url): string
     {
         // validate resource
-        if ('' === $resource) {
-            throw new \UnexpectedValueException('The argument to download is empty');
+        if ('' === $url) {
+            throw new UnexpectedValueException('The argument to download is empty');
         }
 
         // set destination
-        $localPath = $this->buildPath($resource);
+        $localPath = $this->buildPath($url);
 
         // create local path
         $dirname = dirname($localPath);
         /** @noinspection PhpUsageOfSilenceOperatorInspection */
         if (! is_dir($dirname) && ! @mkdir($dirname, 0777, true)) {
-            throw new \RuntimeException("Unable to create directory $dirname");
+            throw new RuntimeException("Unable to create directory $dirname");
         }
 
         // download the file into its final destination
-        $this->downloader->downloadTo($resource, $localPath);
+        $this->downloader->downloadTo($url, $localPath);
 
         // check content is valid
-        $this->checkIsValidDownloadedFile($resource, $localPath);
+        $this->checkIsValidDownloadedFile($url, $localPath);
 
         return $localPath;
     }
@@ -114,7 +117,7 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
     /**
      * @return void
      */
-    protected function clearHistory()
+    protected function clearHistory(): void
     {
         $this->history = [];
     }
@@ -124,7 +127,7 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
      * @param string $localpath
      * @return void
      */
-    protected function addToHistory(string $source, string $localpath)
+    protected function addToHistory(string $source, string $localpath): void
     {
         $this->history[$source] = $localpath;
     }

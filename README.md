@@ -1,4 +1,4 @@
-# eclipxe/XmlResourceRetriever
+# `Eclipxe/XmlResourceRetriever`
 
 [![Source Code][badge-source]][source]
 [![Latest Version][badge-release]][release]
@@ -10,8 +10,8 @@
 
 > XSD and XLST resource downloader for local storage
 
-The purpose of this library is to download recursively XML resources from internet to a local storage for further usage.
-In this moment it only allows Schemas (XSL) and Transformations (XSLT) but is easely extensible implementing the
+The purpose of this library is to download recursively XML resources from the internet to a local storage for further usage.
+At this moment it only allows Schemas (XSL) and Transformations (XSLT) but is easely extensible implementing the
 `RetrieverInterface` interface or extending the `AbstractXmlRetriever` class.
 
 For every downloaded file it will override its dependences to a relative location, in this way, every dependence
@@ -32,12 +32,13 @@ composer require eclipxe/xmlresourceretriever
 
 ```php
 <?php
+declare(strict_types=1);
 /*
  * This will download the file into
  * /project/cache/www.sat.gob.mx/sitio_internet/cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt
  * and all its includes and imports (currently 27 files)
  */
-use XmlResourceRetriever\XsltRetriever;
+use Eclipxe\XmlResourceRetriever\XsltRetriever;
 $xslt = new XsltRetriever('/project/cache');
 $local = $xslt->retrieve('http://www.sat.gob.mx/sitio_internet/cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt');
 echo $local; /* /project/cache/www.sat.gob.mx/sitio_internet/cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt */
@@ -45,14 +46,14 @@ echo $local; /* /project/cache/www.sat.gob.mx/sitio_internet/cfd/3/cadenaorigina
 
 ## Retriever more information
 
-This methods apply to `XslRetriever` and `XsltRetriever` 
+These methods apply to `XslRetriever` and `XsltRetriever` 
 
-- `retrieve($url)`: Download recursively an url and store it into the retriever base path,
+- `retrieve($url)` Download recursively an url and store it into the retriever base path,
   it changes the child elements that contains references to other files.
-- `download($url)`:  Download an url and store it into the retriever base path.
+- `download($url)`  Download an url and store it into the retriever base path.
   It does not validate the file for xml errors. It does not download dependences.
-- `buildPath($url)`: Return the location of were a file should be stored according to the base path.
-- `setDownloader($downloader)`: Change the default `PhpDownloader` to a custom implementation.
+- `buildPath($url)` Return the location of were a file should be stored according to the base path.
+- `setDownloader($downloader)` Change the default `PhpDownloader` to a custom implementation.
 
 `XsdRetriever` search for namespace `http://www.w3.org/2001/XMLSchema` elements `import` and `include`.
 
@@ -70,7 +71,7 @@ and don't forget to take a look in the [TODO][] and [CHANGELOG][] files.
 
 ## Copyright and License
 
-The `eclipxe/XmlResourceRetriever` library is copyright © [Carlos C Soto](http://eclipxe.com.mx)
+The `Eclipxe\XmlResourceRetriever` library is copyright © [Carlos C Soto](http://eclipxe.com.mx)
 and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
 
 [contributing]: https://github.com/eclipxe13/XmlResourceRetriever/blob/master/CONTRIBUTING.md
@@ -80,7 +81,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [source]: https://github.com/eclipxe13/XmlResourceRetriever
 [release]: https://github.com/eclipxe13/XmlResourceRetriever/releases
 [license]: https://github.com/eclipxe13/XmlResourceRetriever/blob/master/LICENSE
-[build]: https://travis-ci.org/eclipxe13/XmlResourceRetriever?branch=master
+[build]: https://github.com/eclipxe13/XmlResourceRetriever/actions/workflows/build.yml?query=branch:master
 [quality]: https://scrutinizer-ci.com/g/eclipxe13/XmlResourceRetriever/
 [coverage]: https://scrutinizer-ci.com/g/eclipxe13/XmlResourceRetriever/code-structure/master/code-coverage
 [downloads]: https://packagist.org/packages/eclipxe/XmlResourceRetriever
@@ -88,7 +89,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [badge-source]: https://img.shields.io/badge/source-eclipxe13/XmlResourceRetriever-blue.svg?style=flat-square
 [badge-release]: https://img.shields.io/github/release/eclipxe13/XmlResourceRetriever.svg?style=flat-square
 [badge-license]: https://img.shields.io/github/license/eclipxe13/XmlResourceRetriever.svg?style=flat-square
-[badge-build]: https://img.shields.io/travis/eclipxe13/XmlResourceRetriever/master.svg?style=flat-square
+[badge-build]: https://img.shields.io/github/workflow/status/eclipxe13/XmlResourceRetriever/build/master?style=flat-square
 [badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/XmlResourceRetriever/master.svg?style=flat-square
 [badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/XmlResourceRetriever/master.svg?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/XmlResourceRetriever.svg?style=flat-square

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetriever\Downloader;
+namespace Eclipxe\XmlResourceRetriever\Downloader;
 
 use Exception;
 use InvalidArgumentException;
@@ -34,10 +34,9 @@ class PhpDownloader implements DownloaderInterface
     /**
      * Set the context (created with stream_context_create) that will be used when try to download
      * @param resource|mixed $context
-     * @return void
      * @see https://php.net/stream-context-create
      */
-    public function setContext($context)
+    public function setContext($context): void
     {
         if (! is_resource($context)) {
             throw new InvalidArgumentException('Provided context is not a resource');
@@ -56,7 +55,7 @@ class PhpDownloader implements DownloaderInterface
         return stream_context_get_default();
     }
 
-    public function downloadTo(string $source, string $destination)
+    public function downloadTo(string $source, string $destination): void
     {
         /** @noinspection PhpUsageOfSilenceOperatorInspection */
         if (! @copy($source, $destination, $this->getContext())) {

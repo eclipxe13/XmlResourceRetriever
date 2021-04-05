@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetriever;
+namespace Eclipxe\XmlResourceRetriever;
 
 class XsdRetriever extends AbstractXmlRetriever
 {
@@ -11,6 +11,9 @@ class XsdRetriever extends AbstractXmlRetriever
         return 'http://www.w3.org/2001/XMLSchema';
     }
 
+    /**
+     * @return array<int, array<string, string>>
+     */
     protected function searchElements(): array
     {
         return [

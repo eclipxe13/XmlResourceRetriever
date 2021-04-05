@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XmlResourceRetriever;
+namespace Eclipxe\XmlResourceRetriever;
 
 class XsltRetriever extends AbstractXmlRetriever
 {
@@ -11,6 +11,9 @@ class XsltRetriever extends AbstractXmlRetriever
         return 'http://www.w3.org/1999/XSL/Transform';
     }
 
+    /**
+     * @return array<int, array<string, string>>
+     */
     protected function searchElements(): array
     {
         return [
