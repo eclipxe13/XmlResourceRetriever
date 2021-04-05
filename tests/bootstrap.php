@@ -12,10 +12,10 @@ require_once __DIR__ . '/../vendor/autoload.php';
 call_user_func(function (): void {
     // Command that starts the built-in web server
     $command = sprintf(
-        'php -S %s:%d -t %s >/dev/null 2>&1 & echo $!',
+        'php -S %s:%d -t %s > /dev/null 2>&1 & echo $!',
         '127.0.0.1',
         '8999',
-        escapeshellarg(__DIR__ . '/public')
+        escapeshellarg(__DIR__ . '/public/')
     );
 
     // Execute the command and store the process ID
@@ -27,11 +27,14 @@ call_user_func(function (): void {
     $pid = (int) $output[0];
 
     // Kill the web server when the process ends
-    /** @var callable(): void $shutdownKillPid */
-    $shutdownKillPid = function () use ($pid): void {
+    register_shutdown_function(function () use ($pid): void {
         exec('kill ' . $pid);
-    };
-    register_shutdown_function($shutdownKillPid);
-    // wait 0.5 seconds to server start before continue
-    usleep(50000);
+    });
+
+    // wait until server is responding
+    do {
+        usleep(10000); // wait 0.01 seconds before each try
+        $headers = @get_headers('http://localhost:8999/README.md', 1) ?: [];
+        $httpResponse = $headers[0] ?? '';
+    } while (false === strpos($httpResponse, '200 OK'));
 });
