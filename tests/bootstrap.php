@@ -34,7 +34,7 @@ call_user_func(function (): void {
     // wait until server is responding
     do {
         usleep(10000); // wait 0.01 seconds before each try
-        $headers = @get_headers('http://localhost:8999/README.md', 1) ?: [];
+        $headers = @get_headers('http://localhost:8999/README.md') ?: [];
         $httpResponse = $headers[0] ?? '';
     } while (false === strpos($httpResponse, '200 OK'));
 });
