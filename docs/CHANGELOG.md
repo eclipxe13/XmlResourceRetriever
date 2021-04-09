@@ -2,6 +2,12 @@
 
 Notice: This library follows [SEMVER 2.0.0](https://semver.org/spec/v2.0.0.html) convention.
 
+Important: **The version `1.x` has been deprecated, please use version `2.0`.**
+
+## Version 1.3.2 2020-04-08
+
+- Allow download XML without XML Declaration `<?xml version...` on `AbstractXmlRetriever`.
+
 ## Version 1.3.1 2020-01-08
 
 This is a development maintenance version.

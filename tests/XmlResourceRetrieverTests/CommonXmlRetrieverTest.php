@@ -216,4 +216,14 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
             $this->assertContains(basename($retrievedFile), $expectedRetrievedFiles);
         }
     }
+
+    public function testRetrieveXmlWithoutXmlDeclaration()
+    {
+        $localPath = $this->buildPath('common');
+        $this->pathToClear($localPath);
+        $resource = 'http://localhost:8999/other/xml-without-declaration.xml';
+        $retriever = new CommonXmlRetriever($localPath);
+        $local = $retriever->retrieve($resource);
+        $this->assertFileExists($local);
+    }
 }

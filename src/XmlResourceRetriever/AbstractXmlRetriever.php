@@ -125,7 +125,7 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
         }
         // check content is xml
         $mimetype = (new finfo())->file($path, FILEINFO_MIME_TYPE);
-        if (! in_array($mimetype, ['text/xml', 'application/xml'])) {
+        if (! in_array($mimetype, ['text/xml', 'application/xml', 'text/plain'])) {
             unlink($path);
             throw new RuntimeException("The source $source ($mimetype) is not an xml file");
         }
