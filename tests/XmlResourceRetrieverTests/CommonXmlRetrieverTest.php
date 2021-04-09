@@ -88,7 +88,7 @@ final class CommonXmlRetrieverTest extends RetrieverTestCase
     {
         $localPath = $this->buildPath('other');
         $this->pathToClear($localPath);
-        $remote = 'http://localhost:8999/other/sample.txt';
+        $remote = 'http://localhost:8999/other/sample.txt.gz';
         $retriever = new CommonXmlRetriever($localPath);
 
         /*
