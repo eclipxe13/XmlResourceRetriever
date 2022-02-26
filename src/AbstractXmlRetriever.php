@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Eclipxe\XmlResourceRetriever;
 
 use DOMDocument;
-use DOMElement;
 use finfo;
 use RuntimeException;
 
@@ -88,7 +87,6 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
         $modified = false;
         $elements = $document->getElementsByTagNameNS($this->searchNamespace(), $tagName);
         foreach ($elements as $element) {
-            /** @var DOMElement $element */
             if (! $element->hasAttribute($attributeName)) {
                 continue;
             }
