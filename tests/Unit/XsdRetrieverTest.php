@@ -31,7 +31,8 @@ final class XsdRetrieverTest extends RetrieverTestCase
 
     public function testRetrieveComplexStructure(): void
     {
-        if (! is_dir($this->publicPath('www.sat.gob.mx'))) {
+        $pathSatUrls = $this->publicPath('sat-urls.txt');
+        if (! is_dir($this->publicPath('www.sat.gob.mx')) || ! is_file($pathSatUrls)) {
             $this->markTestSkipped('Download complex structures from www.sat.gob.mx to run this test');
         }
         $localPath = $this->buildPath('SATXSD');
@@ -39,11 +40,12 @@ final class XsdRetrieverTest extends RetrieverTestCase
         $remotePrefix = 'http://localhost:8999/www.sat.gob.mx/sitio_internet/';
         $remote = $remotePrefix . 'cfd/3/cfdv33.xsd';
         $retriever = new XsdRetriever($localPath);
-        $expectedRemotes = [
-            'cfd/3/cfdv33.xsd',
-            'cfd/tipoDatos/tdCFDI/tdCFDI.xsd',
-            'cfd/catalogos/catCFDI.xsd',
-        ];
+        $expectedRemotes = array_map(
+            function (string $url): string {
+                return str_replace('http://www.sat.gob.mx/sitio_internet/', '', trim($url));
+            },
+            preg_grep('/xsd$/', explode(PHP_EOL, file_get_contents($pathSatUrls) ?: ''))
+        );
         // verify path of downloaded file
         $retriever->retrieve($remote);
         // verify file exists

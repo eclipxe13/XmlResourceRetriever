@@ -23,6 +23,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Install tests/public/www.sat.gob.mx
+        run: |
+          if [ -z "$(which wget)" ]; then
+            apt-get -q update
+            apt-get -q install wget
+          fi
+          cd tests/public
+          rm -r -f www.sat.gob.mx
+          wget -r -i sat-urls.txt
+          find -type f -name "*.x*" -exec sed -i 's#http://www.sat.gob.mx/sitio_internet#http://localhost:8999/www.sat.gob.mx/sitio_internet#g' "{}" \;
+
       # see https://github.com/marketplace/actions/setup-php-action
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
