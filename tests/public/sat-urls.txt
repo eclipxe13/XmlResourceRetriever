@@ -1,7 +1,6 @@
 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd
 http://www.sat.gob.mx/sitio_internet/cfd/catalogos/catCFDI.xsd
 http://www.sat.gob.mx/sitio_internet/cfd/tipoDatos/tdCFDI/tdCFDI.xsd
-
 http://www.sat.gob.mx/sitio_internet/cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt
 http://www.sat.gob.mx/sitio_internet/cfd/2/cadenaoriginal_2_0/utilerias.xslt
 http://www.sat.gob.mx/sitio_internet/cfd/EstadoDeCuentaCombustible/ecc11.xslt
@@ -29,3 +28,10 @@ http://www.sat.gob.mx/sitio_internet/cfd/iedu/iedu.xslt
 http://www.sat.gob.mx/sitio_internet/cfd/ventavehiculos/ventavehiculos11.xslt
 http://www.sat.gob.mx/sitio_internet/cfd/terceros/terceros11.xslt
 http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos10.xslt
+http://www.sat.gob.mx/sitio_internet/cfd/detallista/detallista.xslt
+http://www.sat.gob.mx/sitio_internet/cfd/EstadoDeCuentaCombustible/ecc12.xslt
+http://www.sat.gob.mx/sitio_internet/cfd/consumodecombustibles/consumodeCombustibles11.xslt
+http://www.sat.gob.mx/sitio_internet/cfd/GastosHidrocarburos10/GastosHidrocarburos10.xslt
+http://www.sat.gob.mx/sitio_internet/cfd/IngresosHidrocarburos10/IngresosHidrocarburos.xslt
+http://www.sat.gob.mx/sitio_internet/cfd/CartaPorte/CartaPorte.xslt
+http://www.sat.gob.mx/sitio_internet/cfd/CartaPorte/CartaPorte20.xslt

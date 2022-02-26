@@ -62,6 +62,6 @@ class Utils
                 return static::simplifyPath(implode('/', $parts));
             }
         }
-        return array_values($parts);
+        return $parts;
     }
 }

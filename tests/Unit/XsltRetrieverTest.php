@@ -31,7 +31,8 @@ final class XsltRetrieverTest extends RetrieverTestCase
 
     public function testRetrieveComplexStructure(): void
     {
-        if (! is_dir($this->publicPath('www.sat.gob.mx'))) {
+        $pathSatUrls = $this->publicPath('sat-urls.txt');
+        if (! is_dir($this->publicPath('www.sat.gob.mx')) || ! is_file($pathSatUrls)) {
             $this->markTestSkipped('Download complex structures from www.sat.gob.mx to run this test');
         }
         $localPath = $this->buildPath('SATXSLT');
@@ -39,35 +40,12 @@ final class XsltRetrieverTest extends RetrieverTestCase
         $remotePrefix = 'http://localhost:8999/www.sat.gob.mx/sitio_internet/';
         $remote = $remotePrefix . 'cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt';
         $retriever = new XsltRetriever($localPath);
-        $expectedRemotes = [
-            'cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt',
-            'cfd/2/cadenaoriginal_2_0/utilerias.xslt',
-            'cfd/EstadoDeCuentaCombustible/ecc11.xslt',
-            'cfd/donat/donat11.xslt',
-            'cfd/divisas/divisas.xslt',
-            'cfd/implocal/implocal.xslt',
-            'cfd/leyendasFiscales/leyendasFisc.xslt',
-            'cfd/pfic/pfic.xslt',
-            'cfd/TuristaPasajeroExtranjero/TuristaPasajeroExtranjero.xslt',
-            'cfd/nomina/nomina12.xslt',
-            'cfd/cfdiregistrofiscal/cfdiregistrofiscal.xslt',
-            'cfd/pagoenespecie/pagoenespecie.xslt',
-            'cfd/aerolineas/aerolineas.xslt',
-            'cfd/valesdedespensa/valesdedespensa.xslt',
-            'cfd/consumodecombustibles/consumodecombustibles.xslt',
-            'cfd/notariospublicos/notariospublicos.xslt',
-            'cfd/vehiculousado/vehiculousado.xslt',
-            'cfd/servicioparcialconstruccion/servicioparcialconstruccion.xslt',
-            'cfd/renovacionysustitucionvehiculos/renovacionysustitucionvehiculos.xslt',
-            'cfd/certificadodestruccion/certificadodedestruccion.xslt',
-            'cfd/arteantiguedades/obrasarteantiguedades.xslt',
-            'cfd/ComercioExterior11/ComercioExterior11.xslt',
-            'cfd/ine/ine11.xslt',
-            'cfd/iedu/iedu.xslt',
-            'cfd/ventavehiculos/ventavehiculos11.xslt',
-            'cfd/terceros/terceros11.xslt',
-            'cfd/Pagos/Pagos10.xslt',
-        ];
+        $expectedRemotes = array_map(
+            function (string $url): string {
+                return str_replace('http://www.sat.gob.mx/sitio_internet/', '', trim($url));
+            },
+            preg_grep('/xslt$/', explode(PHP_EOL, file_get_contents($pathSatUrls) ?: '')) ?: []
+        );
         // verify path of downloaded file
         $retriever->retrieve($remote);
         // verify file exists
