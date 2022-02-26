@@ -61,7 +61,7 @@ These methods apply to `XslRetriever` and `XsltRetriever`
 
 ## PHP Support
 
-This library is compatible with latest [PHP supported version](https://www.php.net/supported-versions.php) and above.
+This library is compatible with the latest [PHP supported version](https://www.php.net/supported-versions.php) and above.
 Please, try to use the full potential of the language.
 
 ## Contributing
