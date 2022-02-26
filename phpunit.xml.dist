@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+    cacheResultFile="build/phpunit.result.cache"
     bootstrap="./tests/bootstrap.php"
-    colors="true"
->
+    colors="true">
   <coverage>
     <include>
       <directory suffix=".php">./src/</directory>
