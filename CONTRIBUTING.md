@@ -3,7 +3,7 @@
 Contributions are welcome. We accept pull requests on [GitHub](https://github.com/eclipxe13/XmlResourceRetriever).
 
 This project adheres to a
-[Contributor Code of Conduct](https://github.com/eclipxe13/XmlResourceRetriever/blob/master/CODE_OF_CONDUCT.md).
+[Contributor Code of Conduct](https://github.com/eclipxe13/XmlResourceRetriever/blob/main/CODE_OF_CONDUCT.md).
 By participating in this project and its community, you are expected to uphold this code.
 
 ## Team members
@@ -55,7 +55,7 @@ When you do begin working on your feature, here are some guidelines to consider:
 * Follow our code style using `squizlabs/php_codesniffer` and `friendsofphp/php-cs-fixer`.
 * Please **write tests** for any new features you add.
 * Please **ensure that tests pass** before submitting your pull request. We have Travis CI automatically running tests for pull requests. However, running the tests locally will help save time.
-* **Use topic/feature branches.** Please do not ask us to pull from your master branch.
+* **Use topic/feature branches.** Please do not ask us to pull from your main branch.
 * **Submit one feature per pull request.** If you have multiple features you wish to submit, please break them up into separate pull requests.
 * **Send coherent history**. Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please squash them before submitting.
 

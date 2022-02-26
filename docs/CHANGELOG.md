@@ -5,6 +5,7 @@ Notice: This library follows [SEMVER 2.0.0](https://semver.org/spec/v2.0.0.html)
 ## Version 2.0.1 2022-02-25
 
 - Update license year. Happy 2022.
+- Rename git main branch from `master` to `main`.
 - Improve GitHub Workflow CI:
   - Split steps into jobs.
   - Install SAT files to test complex structures.
