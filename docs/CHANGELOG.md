@@ -2,6 +2,22 @@
 
 Notice: This library follows [SEMVER 2.0.0](https://semver.org/spec/v2.0.0.html) convention.
 
+## Version 2.0.1 2022-02-25
+
+- Update license year. Happy 2022.
+- Improve GitHub Workflow CI:
+  - Split steps into jobs.
+  - Install SAT files to test complex structures.
+  - Add PHP 8.1 to test matrix.
+- Update grammar and add PHP version.
+- Update development tools:
+  - Move tools from `composer` and `vendor/bin/` to `phive` and `tools/`.
+  - Upgrade `php-cs-fixer` to version 3.6.
+  - Remove deprecated attibute `totallyTyped` on `psalm.xml.dist`.
+- Update contributing guide.
+- Update files included on distribution package.
+- Update guide to update `tests/public/www.sat.gob.mx`.
+
 ## Version 2.0.0 2021-04-03
 
 - This version changes the namespace to `Eclipxe\XmlResourceRetriever`.
