@@ -59,13 +59,27 @@ When you do begin working on your feature, here are some guidelines to consider:
 * **Submit one feature per pull request.** If you have multiple features you wish to submit, please break them up into separate pull requests.
 * **Send coherent history**. Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please squash them before submitting.
 
+## Update dependencies
+
+Install project dependencies
+
+```
+composer update
+```
+
+Install development dependencies
+
+```
+composer update
+```
+
 ## Check the code style
 
 If you are having issues with coding standars use `php-cs-fixer` and `phpcbf`
 
 ```shell
-vendor/bin/php-cs-fixer fix -v
-vendor/bin/phpcbf src/ tests/
+tools/php-cs-fixer fix -v
+tools/phpcbf src/ tests/
 ```
 
 ## Running Tests
@@ -75,11 +89,11 @@ If any of these do not pass, it will result in a complete build failure.
 Before you can run these, be sure to `composer install` or `composer update`.
 
 ```shell
-vendor/bin/phpcs -sp
-vendor/bin/php-cs-fixer fix --dry-run -v
-vendor/bin/phpunit --testdox
-vendor/bin/phpstan analyze
-vendor/bin/psalm
+tools/phpcs -sp
+tools/php-cs-fixer fix --dry-run -v
+vendor/bin/phpunit --testdox --verbose
+tools/phpstan analyze
+tools/psalm
 ```
 
 There are some tests that require you to download big samples, please read [tests/public/README.md](tests/public/README.md) to

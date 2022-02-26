@@ -41,7 +41,7 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           extensions: filter, fileinfo, dom
           coverage: none
-          tools: composer:v2, cs2pr
+          tools: composer:v2, cs2pr, phpcs, php-cs-fixer, phpstan, psalm
         env:
           fail-fast: true
 
@@ -60,16 +60,16 @@ jobs:
         run: composer upgrade --no-interaction --no-progress --prefer-dist
 
       - name: Code style (phpcs)
-        run: vendor/bin/phpcs -q --report=checkstyle | cs2pr
+        run: phpcs -q --report=checkstyle | cs2pr
 
       - name: Code style (php-cs-fixer)
-        run: vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
+        run: php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
 
       - name: Unit tests (phpunit)
         run: vendor/bin/phpunit --testdox --verbose
 
       - name: Code analysis (phpstan)
-        run: vendor/bin/phpstan analyse --no-progress --verbose
+        run: phpstan analyse --no-progress
 
       - name: Code analysis (psalm)
-        run: vendor/bin/phpstan
+        run: psalm analyse --no-progress

@@ -1,4 +1,5 @@
 # do not include this files on git
+/tools
 /vendor
 /composer.lock
 /tests/public/www.sat.gob.mx
