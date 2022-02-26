@@ -50,7 +50,7 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
     public function __construct(string $basePath, DownloaderInterface $downloader = null)
     {
         $this->basePath = $basePath;
-        $this->setDownloader($downloader ? : new PhpDownloader());
+        $this->setDownloader($downloader ?: new PhpDownloader());
     }
 
     public function getBasePath(): string
