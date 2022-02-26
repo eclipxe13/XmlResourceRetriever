@@ -1,6 +1,7 @@
 # `Eclipxe/XmlResourceRetriever`
 
 [![Source Code][badge-source]][source]
+[![Packagist PHP Version Support][badge-php-version]][php-version]
 [![Latest Version][badge-release]][release]
 [![Software License][badge-license]][license]
 [![Build Status][badge-build]][build]
@@ -79,6 +80,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [todo]: https://github.com/eclipxe13/XmlResourceRetriever/blob/master/docs/TODO.md
 
 [source]: https://github.com/eclipxe13/XmlResourceRetriever
+[php-version]: https://packagist.org/packages/eclipxe/XmlResourceRetriever
 [release]: https://github.com/eclipxe13/XmlResourceRetriever/releases
 [license]: https://github.com/eclipxe13/XmlResourceRetriever/blob/master/LICENSE
 [build]: https://github.com/eclipxe13/XmlResourceRetriever/actions/workflows/build.yml?query=branch:master
@@ -86,10 +88,11 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [coverage]: https://scrutinizer-ci.com/g/eclipxe13/XmlResourceRetriever/code-structure/master/code-coverage
 [downloads]: https://packagist.org/packages/eclipxe/XmlResourceRetriever
 
-[badge-source]: https://img.shields.io/badge/source-eclipxe13/XmlResourceRetriever-blue.svg?style=flat-square
-[badge-release]: https://img.shields.io/github/release/eclipxe13/XmlResourceRetriever.svg?style=flat-square
-[badge-license]: https://img.shields.io/github/license/eclipxe13/XmlResourceRetriever.svg?style=flat-square
+[badge-source]: https://img.shields.io/badge/source-eclipxe13/XmlResourceRetriever-blue?style=flat-square
+[badge-php-version]: https://img.shields.io/packagist/php-v/eclipxe/XmlResourceRetriever?style=flat-square
+[badge-release]: https://img.shields.io/github/release/eclipxe13/XmlResourceRetriever?style=flat-square
+[badge-license]: https://img.shields.io/github/license/eclipxe13/XmlResourceRetriever?style=flat-square
 [badge-build]: https://img.shields.io/github/workflow/status/eclipxe13/XmlResourceRetriever/build/master?style=flat-square
-[badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/XmlResourceRetriever/master.svg?style=flat-square
-[badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/XmlResourceRetriever/master.svg?style=flat-square
-[badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/XmlResourceRetriever.svg?style=flat-square
+[badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/XmlResourceRetriever/master?style=flat-square
+[badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/XmlResourceRetriever/master?style=flat-square
+[badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/XmlResourceRetriever?style=flat-square
