@@ -61,16 +61,16 @@ When you do begin working on your feature, here are some guidelines to consider:
 
 ## Update dependencies
 
-Install project dependencies
+Install project dependencies using [`composer`](https://getcomposer.org/download/).
 
 ```
 composer update
 ```
 
-Install development dependencies
+Install development dependencies using [`phive`](https://phar.io/).
 
 ```
-composer update
+phive update
 ```
 
 ## Check the code style
@@ -79,7 +79,7 @@ If you are having issues with coding standars use `php-cs-fixer` and `phpcbf`
 
 ```shell
 tools/php-cs-fixer fix -v
-tools/phpcbf src/ tests/
+tools/phpcbf -sp
 ```
 
 ## Running Tests
