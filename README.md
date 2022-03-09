@@ -72,7 +72,7 @@ and don't forget to take a look in the [TODO][] and [CHANGELOG][] files.
 
 ## Copyright and License
 
-The `Eclipxe\XmlResourceRetriever` library is copyright © [Carlos C Soto](http://eclipxe.com.mx)
+The `Eclipxe\XmlResourceRetriever` library is copyright © [Carlos C Soto](https://eclipxe.com.mx/)
 and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
 
 [contributing]: https://github.com/eclipxe13/XmlResourceRetriever/blob/main/CONTRIBUTING.md
