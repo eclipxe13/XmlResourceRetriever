@@ -2,6 +2,11 @@
 
 Notice: This library follows [SEMVER 2.0.0](https://semver.org/spec/v2.0.0.html) convention.
 
+## Unreleased 2022-03-08
+
+- Fix build because PHPStan needs type specification on `DOMNodeList`.
+- Update development tools as of 2022-03-08.
+
 ## Version 2.0.1 2022-02-25
 
 - Update license year. Happy 2022.
