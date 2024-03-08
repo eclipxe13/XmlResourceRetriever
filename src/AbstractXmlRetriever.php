@@ -65,7 +65,7 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
                 $search['element'],
                 $search['attribute'],
                 $resource,
-                $localFilename
+                $localFilename,
             );
             if ($recursiveRetrieve) {
                 $changed = true;
@@ -83,7 +83,7 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
         string $tagName,
         string $attributeName,
         string $currentUrl,
-        string $currentFile
+        string $currentFile,
     ): bool {
         $modified = false;
         /** @var iterable<DOMElement> $elements */
