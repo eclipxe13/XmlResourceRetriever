@@ -13,7 +13,7 @@ on:
 jobs:
 
   phpcs:
-    name: Code style (phpcs)
+    name: Coding standard (phpcs)
     runs-on: "ubuntu-latest"
     steps:
       - name: Checkout
@@ -30,7 +30,7 @@ jobs:
         run: phpcs -q --report=checkstyle | cs2pr
 
   php-cs-fixer:
-    name: Code style (php-cs-fixer)
+    name: Coding standard (php-cs-fixer)
     runs-on: "ubuntu-latest"
     steps:
       - name: Checkout
