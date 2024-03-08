@@ -44,7 +44,7 @@ final class XsltRetrieverTest extends RetrieverTestCase
             function (string $url): string {
                 return str_replace('http://www.sat.gob.mx/sitio_internet/', '', trim($url));
             },
-            preg_grep('/xslt$/', explode(PHP_EOL, file_get_contents($pathSatUrls) ?: '')) ?: [],
+            preg_grep('/xslt$/', explode(PHP_EOL, file_get_contents($pathSatUrls) ?: '')) ?: []
         );
         // verify path of downloaded file
         $retriever->retrieve($remote);

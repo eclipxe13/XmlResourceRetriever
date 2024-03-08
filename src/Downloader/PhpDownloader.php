@@ -43,7 +43,7 @@ class PhpDownloader implements DownloaderInterface
         }
         if ('stream-context' !== get_resource_type($context)) {
             throw new InvalidArgumentException(
-                sprintf('Provided context is not a stream-context resource, given: %s', get_resource_type($context)),
+                sprintf('Provided context is not a stream-context resource, given: %s', get_resource_type($context))
             );
         }
         $this->context = $context;
