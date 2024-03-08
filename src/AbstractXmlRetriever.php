@@ -125,7 +125,7 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
             throw new RuntimeException("The source $source is not an xml file because it is empty");
         }
         // check content is xml
-        $mimetype = (new finfo())->file($localpath, FILEINFO_MIME_TYPE) ?: '';
+        $mimetype = strval((new finfo())->file($localpath, FILEINFO_MIME_TYPE));
         if ('application/xml' !== $mimetype && 'text/' !== substr($mimetype, 0, 5)) {
             unlink($localpath);
             throw new RuntimeException("The source $source ($mimetype) is not an xml file");
@@ -137,7 +137,10 @@ abstract class AbstractXmlRetriever extends AbstractBaseRetriever implements Ret
         if (false !== $this->urlParts($url)) {
             return $url;
         }
-        $currentParts = $this->urlParts($currentUrl) ?: [];
+        $currentParts = $this->urlParts($currentUrl);
+        if (false === $currentParts) {
+            $currentParts = [];
+        }
         $currentParts['port'] = $currentParts['port'] ?? '';
         $currentParts['port'] = ('' !== $currentParts['port']) ? ':' . $currentParts['port'] : '';
         return implode('', [
