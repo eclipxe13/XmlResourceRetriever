@@ -16,7 +16,7 @@ return (new PhpCsFixer\Config())
         '@PSR12' => true,
         '@PSR12:risky' => true,
         '@PHP71Migration:risky' => true,
-        // 'void_return' => false,
+        'void_return' => false,
         '@PHP73Migration' => true,
         // symfony
         'class_attributes_separation' => true,
