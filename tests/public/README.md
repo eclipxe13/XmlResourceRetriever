@@ -1,11 +1,12 @@
+# About public resources
+
 This folder is used to perform tests, is the public root folder for PHP intetnal web server.
 
 ```shell
 php -S 127.0.0.1:8999 -t tests/public/
 ```
 
-As I was unable to create complex structures for XSD and XSLT files-
-I had taken from Mexico SAT Goverment:
+As I was unable to create complex structures for XSD and XSLT files I had taken from Mexico SAT Government:
 
 - http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd
 - http://www.sat.gob.mx/sitio_internet/cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt

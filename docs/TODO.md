@@ -9,4 +9,5 @@
 
 The following changes produces a BC break. Requires a new major version.
 
-- Add return type `void` on `DownloaderInterface::downloadTo`.
+- Add `DownloaderInterface::downloadTo` return type `void`.
+- Remove `'void_return' => false,` rule in `php-cs-fixer` configuration file.
