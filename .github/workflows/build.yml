@@ -99,6 +99,8 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install project dependencies
         run: composer upgrade --no-interaction --no-progress --prefer-dist
+      - name: Psalm version
+        run: psalm --version
       - name: Psalm
         run: psalm --no-progress
 
