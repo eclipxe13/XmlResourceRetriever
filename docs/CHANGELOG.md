@@ -1,6 +1,22 @@
-# eclipxe/XmlResourceRetriever Changelog 
+# eclipxe/XmlResourceRetriever Changelog
 
 Notice: This library follows [SEMVER 2.0.0](https://semver.org/spec/v2.0.0.html) convention.
+
+## Version 2.0.2 2022-03-08
+
+- Improve code and fix issues from psalm avoiding falsy comparisons.
+- Update license year to 2024 and add owner URL.
+- Fix build bagde.
+- Update coding standards.
+- For GitHub workflow:
+    - Run jobs using PHP 8.3.
+    - Add PHP 8.2 and PHP 8.3 to test matrix.
+    - Remove composer tool installation where is not required.
+    - Update GitHub actions to version 4.
+    - Replace GitHub directive `::set-output` with `$GITHUB_OUTPUT`.
+    - Rename php-version matrix variable name (singular).
+    - Display PSalm version before run.
+- Update development tools.
 
 ## Unreleased 2022-03-08
 
