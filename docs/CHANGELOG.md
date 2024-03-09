@@ -8,6 +8,7 @@ Notice: This library follows [SEMVER 2.0.0](https://semver.org/spec/v2.0.0.html)
 - Move `tests/assets/` to `tests/_files/`.
 - Avoid GitHub language detection on folder `tests/_files/`.
 - Remove usage of `dirname(__DIR__)` in favor of `__DIR__ . '/..'`.
+- Improve Scrutinizer configuration file.
 
 ## Version 2.0.2 2024-03-08
 
