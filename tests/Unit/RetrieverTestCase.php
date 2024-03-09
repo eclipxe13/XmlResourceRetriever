@@ -37,17 +37,17 @@ abstract class RetrieverTestCase extends TestCase
 
     protected function buildPath(string $path): string
     {
-        return dirname(__DIR__, 2) . '/build/tests/' . $path;
+        return __DIR__ . '/../../build/tests/' . $path;
     }
 
     protected function publicPath(string $path): string
     {
-        return dirname(__DIR__) . '/public/' . $path;
+        return __DIR__ . '/../public/' . $path;
     }
 
     protected function assetPath(string $path): string
     {
-        return dirname(__DIR__) . '/assets/' . $path;
+        return __DIR__ . '/../_files/' . $path;
     }
 
     private function deleteDir(string $dirname): void
