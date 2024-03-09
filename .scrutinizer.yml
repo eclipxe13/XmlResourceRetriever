@@ -12,7 +12,7 @@ build:
   nodes:
     analysis: # see https://scrutinizer-ci.com/docs/tools/php/php-scrutinizer/
       environment:
-    php:
+        php:
           version: 7.4
       project_setup: { override: true }
       tests:
