@@ -2,7 +2,10 @@
 
 Notice: This library follows [SEMVER 2.0.0](https://semver.org/spec/v2.0.0.html) convention.
 
-## Version 2.0.2 2022-03-08
+## Unreleased changes 2024-03-08
+
+- Move `tests/assets/` to `tests/_files/`.
+
 
 - Improve code and fix issues from psalm avoiding falsy comparisons.
 - Update license year to 2024 and add owner URL.

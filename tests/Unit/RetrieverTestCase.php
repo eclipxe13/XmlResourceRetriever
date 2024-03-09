@@ -47,7 +47,7 @@ abstract class RetrieverTestCase extends TestCase
 
     protected function assetPath(string $path): string
     {
-        return dirname(__DIR__) . '/assets/' . $path;
+        return __DIR__ . '/../_files/' . $path;
     }
 
     private function deleteDir(string $dirname): void
