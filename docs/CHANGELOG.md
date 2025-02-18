@@ -2,6 +2,24 @@
 
 Notice: This library follows [SEMVER 2.0.0](https://semver.org/spec/v2.0.0.html) convention.
 
+## Unreleased changes
+
+Changes without release are documented here.
+
+## Version 2.0.3 2025-02-18
+
+- Compatibilize code with PHP 8.4.
+- Update license year to 2025.
+
+The following changes are to development environment:
+
+- Add PHP 8.4 to test matrix.
+- Remove Psalm, only use PHPStan.
+- Fix PHPStan issues.
+- Update development tools
+- Add xml namespace to `phpcs`.
+- Allow run GitHub workflow manually.
+
 ## Unreleased changes 2024-03-08
 
 - Fix changelog date for version 2.0.2.
