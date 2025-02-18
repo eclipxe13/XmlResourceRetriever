@@ -6,7 +6,7 @@ Notice: This library follows [SEMVER 2.0.0](https://semver.org/spec/v2.0.0.html)
 
 Changes without release are documented here.
 
-## Version 2.0.3 2025-02-18
+## Version 2.0.3 2025-02-19
 
 - Compatibilize code with PHP 8.4.
 - Update license year to 2025.
