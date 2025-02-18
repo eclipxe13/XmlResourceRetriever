@@ -41,6 +41,7 @@ final class XsdRetrieverTest extends RetrieverTestCase
         $remote = $remotePrefix . 'cfd/3/cfdv33.xsd';
         $retriever = new XsdRetriever($localPath);
         $expectedRemotes = array_map(
+            /** @phpstan-ignore-next-line */
             function (string $url): string {
                 return str_replace('http://www.sat.gob.mx/sitio_internet/', '', trim($url));
             },

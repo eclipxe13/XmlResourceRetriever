@@ -41,6 +41,7 @@ final class XsltRetrieverTest extends RetrieverTestCase
         $remote = $remotePrefix . 'cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt';
         $retriever = new XsltRetriever($localPath);
         $expectedRemotes = array_map(
+            /** @phpstan-ignore-next-line */
             function (string $url): string {
                 return str_replace('http://www.sat.gob.mx/sitio_internet/', '', trim($url));
             },
