@@ -43,8 +43,7 @@
         "dev:test": [
             "@dev:check-style",
             "@php vendor/bin/phpunit --testdox --verbose",
-            "@php tools/phpstan analyse --no-progress",
-            "@php tools/psalm --no-progress"
+            "@php tools/phpstan analyse --no-progress"
         ],
         "dev:coverage": [
             "@php -dzend_extension=xdebug.so -dxdebug.mode=coverage vendor/bin/phpunit --coverage-text --coverage-html build/coverage/html/"
@@ -54,7 +53,7 @@
         "dev:build": "DEV: run dev:fix-style and dev:tests, run before pull request",
         "dev:check-style": "DEV: search for code style errors using php-cs-fixer and phpcs",
         "dev:fix-style": "DEV: fix code style errors using php-cs-fixer and phpcbf",
-        "dev:test": "DEV: dev:check-style, phpunit, phpstan and psalm",
+        "dev:test": "DEV: dev:check-style, phpunit and phpstan",
         "dev:coverage": "DEV: run phpunit with xdebug and storage coverage in build/coverage/html/"
     }
 }

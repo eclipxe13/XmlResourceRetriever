@@ -47,7 +47,7 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
      * @param string $basePath
      * @param DownloaderInterface|null $downloader
      */
-    public function __construct(string $basePath, DownloaderInterface $downloader = null)
+    public function __construct(string $basePath, ?DownloaderInterface $downloader = null)
     {
         $this->basePath = $basePath;
         $this->setDownloader($downloader ?: new PhpDownloader());
@@ -74,7 +74,8 @@ abstract class AbstractBaseRetriever implements RetrieverInterface
 
     public function buildPath(string $url): string
     {
-        if (false === $parts = $this->urlParts($url)) {
+        $parts = $this->urlParts($url);
+        if (false === $parts) {
             throw new InvalidArgumentException("Invalid URL: $url");
         }
         return $this->basePath . '/' . $parts['host'] . '/' . ltrim($parts['path'], '/');

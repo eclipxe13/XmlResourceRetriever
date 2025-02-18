@@ -29,8 +29,7 @@ final class PhpDownloaderTest extends TestCase
     {
         $downloader = new PhpDownloader();
         /** @var resource $isNotResource */
-        $isNotResource = null;
-
+        $isNotResource = null; /** @phpstan-ignore-line */
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Provided context is not a resource');
         $downloader->setContext($isNotResource);
