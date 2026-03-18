@@ -24,7 +24,8 @@ If you built a configurable and useful downloader class feel free to contribute 
 
 ## Installation
 
-Use [composer](https://getcomposer.org/), so please run
+Use [composer](https://getcomposer.org/), so please run:
+
 ```shell
 composer require eclipxe/xmlresourceretriever
 ```
@@ -39,7 +40,9 @@ declare(strict_types=1);
  * /project/cache/www.sat.gob.mx/sitio_internet/cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt
  * and all its includes and imports (currently 27 files)
  */
+
 use Eclipxe\XmlResourceRetriever\XsltRetriever;
+
 $xslt = new XsltRetriever('/project/cache');
 $local = $xslt->retrieve('http://www.sat.gob.mx/sitio_internet/cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt');
 echo $local; /* /project/cache/www.sat.gob.mx/sitio_internet/cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt */
