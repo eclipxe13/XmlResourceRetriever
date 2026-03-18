@@ -78,6 +78,10 @@ phive update
 If you are having issues with coding standars use `php-cs-fixer` and `phpcbf`
 
 ```shell
+# using composer
+composer dev:fix-style
+
+# or using tools individually
 tools/php-cs-fixer fix -v
 tools/phpcbf -sp
 ```
@@ -89,11 +93,14 @@ If any of these do not pass, it will result in a complete build failure.
 Before you can run these, be sure to `composer install` or `composer update`.
 
 ```shell
+# using composer
+composer dev:build
+
+# or using tools individually
 tools/phpcs -sp
-tools/php-cs-fixer fix --dry-run -v
-vendor/bin/phpunit --testdox --verbose
+tools/php-cs-fixer fix -v --dry-run
+vendor/bin/phpunit --testdox
 tools/phpstan analyze
-tools/psalm
 ```
 
 There are some tests that require you to download big samples, please read [tests/public/README.md](tests/public/README.md) to
