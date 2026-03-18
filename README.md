@@ -1,7 +1,7 @@
 # `Eclipxe/XmlResourceRetriever`
 
 [![Source Code][badge-source]][source]
-[![Packagist PHP Version Support][badge-php-version]][php-version]
+[![PHP Version][badge-php-version]][php-version]
 [![Latest Version][badge-release]][release]
 [![Software License][badge-license]][license]
 [![Build Status][badge-build]][build]
