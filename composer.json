@@ -11,6 +11,10 @@
             "homepage": "https://eclipxe.com.mx"
         }
     ],
+    "support": {
+        "source": "https://github.com/eclipxe13/XmlResourceRetriever",
+        "issues": "https://github.com/eclipxe13/XmlResourceRetriever/issues"
+    },
     "require": {
         "php": ">=7.3",
         "ext-filter": "*",
