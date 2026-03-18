@@ -113,4 +113,14 @@ of `tests/public` in order to simulate retrieving contents from the internet.
 
 When the phpunit process ends, the web server instance is killed.
 
-Take a look in `tests/boostrap.php` to see how this is working.  
+Take a look in `tests/boostrap.php` to see how this is working.
+
+## Running GitHub Actions locally
+
+You can use [`act`](https://github.com/nektos/act) to run your GitHub Actions locally.
+As documented in [`actions/setup-php-action`](https://github.com/marketplace/actions/setup-php-action#local-testing-setup)
+you will need to execute the command as:
+
+```shell
+act -P ubuntu-latest=shivammathur/node:latest
+```
