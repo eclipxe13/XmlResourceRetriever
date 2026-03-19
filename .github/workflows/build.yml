@@ -10,6 +10,7 @@ on:
 
 # Actions
 # shivammathur/setup-php@v2 https://github.com/marketplace/actions/setup-php-action
+# sudo-bot/action-scrutinizer@latest https://github.com/marketplace/actions/action-scrutinizer
 
 jobs:
 
@@ -115,3 +116,46 @@ jobs:
           find -type f -name "*.x*" -exec sed -i 's#http://www.sat.gob.mx/sitio_internet#http://localhost:8999/www.sat.gob.mx/sitio_internet#g' "{}" \;
       - name: Tests (phpunit)
         run: vendor/bin/phpunit --testdox --verbose
+
+  code-coverage:
+    name: Create code coverage
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          coverage: xdebug
+          tools: composer:v2
+        env:
+          fail-fast: true
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+      - name: Install project dependencies
+        run: composer upgrade --no-interaction --no-progress --prefer-dist
+      - name: Install tests/public/www.sat.gob.mx
+        run: |
+          if [ -z "$(which wget)" ]; then
+            apt-get -q update
+            apt-get -q install wget
+          fi
+          cd tests/public
+          rm -r -f www.sat.gob.mx
+          wget -r -i sat-urls.txt
+          find -type f -name "*.x*" -exec sed -i 's#http://www.sat.gob.mx/sitio_internet#http://localhost:8999/www.sat.gob.mx/sitio_internet#g' "{}" \;
+      - name: Create code coverage
+        run: vendor/bin/phpunit --testdox --coverage-xml=build/coverage --coverage-clover=build/coverage/clover.xml --log-junit=build/coverage/junit.xml
+      - name: Upload code coverage to scrutinizer
+        if: ${{ !env.ACT }} # do not run if using nektos/act
+        uses: sudo-bot/action-scrutinizer@latest
+        with:
+          cli-args: "--format=php-clover build/coverage/clover.xml"
