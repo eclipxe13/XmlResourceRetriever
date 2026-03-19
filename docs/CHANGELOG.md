@@ -20,7 +20,7 @@ The following changes are to development environment:
 - Update *rulesets* on `php-cs-fixer`.
 - Standarize PHPUnit file.
 - On GitHub workflows:
-    -  Add `scrutinizer` job.
+    - Add `scrutinizer` job.
     - Run actions using latest versions.
     - Run jobs using PHP 8.5.
     - Add PHP 8.5 to test matrix.

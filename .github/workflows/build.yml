@@ -117,8 +117,8 @@ jobs:
       - name: Tests (phpunit)
         run: vendor/bin/phpunit --testdox --verbose
 
-  code-coverage:
-    name: Create code coverage
+  scrutinizer:
+    name: Create and upload code coverage to Scrutinizer-CI
     runs-on: "ubuntu-latest"
     steps:
       - name: Checkout
