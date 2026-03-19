@@ -14,7 +14,7 @@ on:
 jobs:
 
   phpcs:
-    name: Coding standard (phpcs)
+    name: Coding standards (phpcs)
     runs-on: "ubuntu-latest"
     steps:
       - name: Checkout
@@ -27,11 +27,11 @@ jobs:
           tools: cs2pr, phpcs
         env:
           fail-fast: true
-      - name: Code style (phpcs)
+      - name: Coding standards (phpcs)
         run: phpcs -q --report=checkstyle | cs2pr
 
   php-cs-fixer:
-    name: Coding standard (php-cs-fixer)
+    name: Coding standards (php-cs-fixer)
     runs-on: "ubuntu-latest"
     steps:
       - name: Checkout
@@ -44,7 +44,7 @@ jobs:
           tools: cs2pr, php-cs-fixer
         env:
           fail-fast: true
-      - name: Code style (php-cs-fixer)
+      - name: Coding standards (php-cs-fixer)
         run: php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
 
   phpstan:
