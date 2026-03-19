@@ -2,16 +2,20 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
     cacheResultFile="build/phpunit.result.cache"
-    bootstrap="./tests/bootstrap.php"
+    bootstrap="tests/bootstrap.php"
+    executionOrder="depends,defects"
     colors="true">
-  <coverage>
-    <include>
-      <directory suffix=".php">./src/</directory>
-    </include>
-  </coverage>
+
   <testsuites>
     <testsuite name="default">
-      <directory suffix="Test.php">./tests/</directory>
+      <directory>tests</directory>
     </testsuite>
   </testsuites>
+
+  <coverage>
+    <include>
+      <directory suffix=".php">src</directory>
+    </include>
+  </coverage>
+
 </phpunit>

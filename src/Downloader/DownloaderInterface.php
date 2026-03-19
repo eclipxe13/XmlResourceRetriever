@@ -14,5 +14,6 @@ interface DownloaderInterface
      * @throws RuntimeException if an error occurs
      * @return void
      */
-    public function downloadTo(string $source, string $destination);
+    /** @php-cs-fixer-ignore void_return */
+    public function downloadTo(string $source, string $destination); /** @phpstan-ignore-line missingType.return */
 }

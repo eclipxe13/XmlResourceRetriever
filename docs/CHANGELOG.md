@@ -6,6 +6,28 @@ Notice: This library follows [SEMVER 2.0.0](https://semver.org/spec/v2.0.0.html)
 
 Changes without release are documented here.
 
+## Version 2.0.4 2026-03-19
+
+- Ensure compatibility code with PHP 8.5.
+- Update license year to 2026.
+
+The following changes are to development environment:
+
+- Add section to run GitHub actions locally on *Contributing* documentation.
+- Scrutinizer-CI: change from create code coverage online to upload it from workflows.
+- Add PHP 8.5 to test matrix.
+- Remove deprecated rule `CallTimePassByReference` on `phpcs`.
+- Update *rulesets* on `php-cs-fixer`.
+- Standarize PHPUnit file.
+- On GitHub workflows:
+    - Add `scrutinizer` job.
+    - Run actions using latest versions.
+    - Run jobs using PHP 8.5.
+    - Add PHP 8.5 to test matrix.
+    - Improve labels an names for jobs and steps.
+- Add support section on `composer.json`.
+- Update development tools.
+
 ## Version 2.0.3 2025-02-18
 
 - Compatibilize code with PHP 8.4.
